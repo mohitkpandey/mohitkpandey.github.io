@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-01T15:14:04-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Mohit Pandey</title><subtitle>Ph.D. Candidate</subtitle><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><entry><title type="html">Digit Classification</title><link href="http://localhost:4000/Digit-Classification/" rel="alternate" type="text/html" title="Digit Classification" /><published>2020-11-01T00:00:00-05:00</published><updated>2020-11-01T00:00:00-05:00</updated><id>http://localhost:4000/Digit-Classification</id><content type="html" xml:base="http://localhost:4000/Digit-Classification/">&lt;b&gt;Digit Recognition using Deep Learning&lt;/b&gt;
+&lt;br&gt;
+Webapp to recognize handwritten digits between 0 and 9. Model trained 
+using Keras and served using Tensorflow.js
+
+
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
+    &lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H0NW5Z2MYC');
+    &lt;/script&gt;
+    
+    &lt;style&gt;
+      body {
+        touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
+        font-family: &quot;Roboto&quot;;
+      }
+      h1 {
+        margin: 50px;
+        font-size: 70px;
+        text-align: center;
+      }
+      #paint {
+        border:3px solid red;
+        margin: auto;
+      }
+      #predicted { 
+        font-size: 20px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      #number {
+        border: 3px solid black;
+        margin: auto;
+        margin-top: 1px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      /*#clear {
+        border: none;
+  color: green;
+  padding: 1px 2px;
+      }*/
+      
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!--&lt;script type=&quot;text/javascript&quot; src=&quot;http://livejs.com/live.js&quot;&gt;&lt;/script&gt;--&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js&quot;&gt;&lt;/script&gt;
+&lt;!--     &lt;h2&gt;Digit Recognition WebApp&lt;/h2&gt;
+ --&gt;    &lt;div id=&quot;paint&quot;&gt;
+      &lt;canvas id=&quot;myCanvas&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;predicted&quot;&gt;
+      Recognized digit
+      &lt;div id=&quot;number&quot;&gt;&lt;/div&gt;
+      &lt;button id ='clear' &gt;Clear&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      $('#paint').css({'width': '60%'});
+      $('#number').css({'width': '30%', 'font-size': '240px'});
+      $('#clear').css({'font-size': '15px'});
+    } else {
+      $('#paint').css({'width': '300px'});
+      $('#number').css({'width': '150px', 'font-size': '120px'});
+      $('#clear').css({'font-size': '15px'});
+    }
+
+    var cw = $('#paint').width();
+    $('#paint').css({'height': cw + 'px'});
+
+    cw = $('#number').width();
+    $('#number').css({'height': cw + 'px'});
+
+    // From https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+
+    var compuetedStyle = getComputedStyle(document.getElementById('paint'));
+    canvas.width = parseInt(compuetedStyle.getPropertyValue('width'));
+    canvas.height = parseInt(compuetedStyle.getPropertyValue('height'));
+
+    var mouse = {x: 0, y: 0};
+
+    canvas.addEventListener('mousemove', function(e) {
+      mouse.x = e.pageX - this.offsetLeft;
+      mouse.y = e.pageY - this.offsetTop;
+    }, false);
+
+    context.lineWidth = isMobile ? 60 : 25;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.strokeStyle = '#0000FF';
+
+    canvas.addEventListener('mousedown', function(e) {
+      context.moveTo(mouse.x, mouse.y);
+      context.beginPath();
+      canvas.addEventListener('mousemove', onPaint, false);
+    }, false);
+
+    canvas.addEventListener('mouseup', function() {
+      $('#number').html('&lt;img id=&quot;spinner&quot; src=&quot;spinner.gif&quot;/&gt;');
+      canvas.removeEventListener('mousemove', onPaint, false);
+      var img = new Image();
+      img.onload = function() {
+        context.drawImage(img, 0, 0, 28, 28);
+        data = context.getImageData(0, 0, 28, 28).data;
+        var input = [];
+        for(var i = 0; i &lt; data.length; i += 4) {
+          input.push(data[i + 2] / 255);
+        }
+        predict(input);
+      };
+      img.src = canvas.toDataURL('image/png');
+    }, false);
+
+    var onPaint = function() {
+      context.lineTo(mouse.x, mouse.y);
+      context.stroke();
+    };
+
+    tf.loadLayersModel('model/model.json').then(function(model) {
+      window.model = model;
+    });
+
+    // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
+    // Set up touch events for mobile, etc
+    canvas.addEventListener('touchstart', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+    canvas.addEventListener('touchend', function (e) {
+      canvas.dispatchEvent(new MouseEvent('mouseup', {}));
+    }, false);
+    canvas.addEventListener('touchmove', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+
+    var predict = function(input) {
+      if (window.model) {
+        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+          scores = scores[0];
+          predicted = scores.indexOf(Math.max(...scores));
+          $('#number').html(predicted);
+        });
+      } else {
+        // The model takes a bit to load, if we are too fast, wait
+        setTimeout(function(){predict(input)}, 50);
+      }
+    }
+
+    $('#clear').click(function(){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      $('#number').html('');
+    });
+    &lt;/script&gt;
+
+
+
+&lt;!-- Non ML related formatting  --&gt;
+
+&lt;script&gt;
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+&lt;/script&gt;
+
+
+&lt;script&gt;
+  (function () {
+    var script = document.createElement(&quot;script&quot;);
+    script.type = &quot;text/javascript&quot;;
+    script.src  = &quot;https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;;
+    document.getElementsByTagName(&quot;head&quot;)[0].appendChild(script);
+  })();
+&lt;/script&gt;
+
+
+
+  &lt;/body&gt;
+&lt;/html&gt;</content><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><summary type="html">Digit Recognition using Deep Learning Webapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js</summary></entry></feed>
