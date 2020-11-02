@@ -19,7 +19,7 @@
 
 
 
-<title>Mohit Pandey - Mohit Pandey</title>
+<title>Digit Classification - Mohit Pandey</title>
 
 
 
@@ -29,7 +29,7 @@
 
 <meta property="og:locale" content="en-US">
 <meta property="og:site_name" content="Mohit Pandey">
-<meta property="og:title" content="Mohit Pandey">
+<meta property="og:title" content="Digit Classification">
 
 
   <link rel="canonical" href="https://mohitkpandey.github.io/">
@@ -37,7 +37,7 @@
 
 
 
-  <meta property="og:description" content="About me">
+  <meta property="og:description" content="Digit Recognition using Deep LearningWebapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js">
 
 
 
@@ -50,6 +50,9 @@
 
 
 
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-11-01T00:00:00-05:00">
 
 
 
@@ -253,19 +256,29 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Mohit Pandey">
-    <meta itemprop="description" content="About me">
-    
+    <meta itemprop="headline" content="Digit Classification">
+    <meta itemprop="description" content="Digit Recognition using Deep LearningWebapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js">
+    <meta itemprop="datePublished" content="November 01, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Mohit Pandey
+          <h1 class="page__title" itemprop="headline">Digit Classification
 </h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
           
         
         
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-01T00:00:00-05:00">November 01, 2020</time></p>
         
         
              
@@ -276,75 +289,183 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Welcome! I am an interdisciplinary researcher with skills and experience in machine learning, radiomics, social media text analytics, and natural language processing. I specialize in deep learning for bioinformatics.</p>
+        <p><b>Digit Recognition using Deep Learning</b>
+<br />
+Webapp to recognize handwritten digits between 0 and 9. Model trained 
+using Keras and served using Tensorflow.js
+<!--more--></p>
 
-<p>My work is published in interdisciplinary science journals like Plos One and cardiac imaging journals (Euporean Heart Journal, JACC: Cardiovascular Imaging etc), My research explores methods to automate prognosis and diagnosis of diseases using deep learning tools. While I primarily focus on applied machine learning, I am also interested in delving further into theories governing statistical machine learning.</p>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<p>I am currently on the job market seeking Research &amp; Developement positions in machine learning.</p>
+      gtag('config', 'G-H0NW5Z2MYC');
+    </script>
+    <title>Digit Recognition WebApp</title>
+    <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
+    <meta name="keywords" content="Machine Learning, TensorFlow.js" />
+    <meta name="author" content="Mohit Pandey" />
+    <style>
+      body {
+        touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
+        font-family: "Roboto";
+      }
+     /* h1 {
+        margin: 50px;
+        font-size: 70px;
+        text-align: center;
+      }
+*/      #paint {
+        border:3px solid red;
+        margin: auto;
+      }
+      #predicted { 
+        font-size: 18px;
+        margin-top: 5px;
+        text-align: center;
+      }
+      #number {
+        border: 3px solid black;
+        margin: auto;
+        margin-top: 5px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #clear {
+        margin: auto;
+        margin-top: 5px;
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+<!--     <h1>Digit Recognition WebApp</h1> -->
+    <div id="paint">
+      <canvas id="myCanvas"></canvas>
+    </div>
+    <div id="predicted">
+      Recognized digit
+      <div id="number"></div>
+      <button id="clear">Clear</button>
+    </div>
+    <script>
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      $('#paint').css({'width': '60%'});
+      $('#number').css({'width': '30%', 'font-size': '240px'});
+      $('#clear').css({'font-size': '18px'});
+    } else {
+      $('#paint').css({'width': '300px'});
+      $('#number').css({'width': '150px', 'font-size': '120px'});
+      $('#clear').css({'font-size': '18px'});
+    }
 
-<h1 id="news">News</h1>
-<!-- <b> July 2019</b> - Left Ipsos, active on job market <br>
-<b>June 2020 </b> - Our paper on Neural Information Retrieval from CT text reports using Convolutional Neural Network is accepted at Plos One. <br>
-<b>Nov 2019</b> - Our poster on Survey of deep learning based natural language processing for social media insights is accepted at Americal Association of Public Opinion Research, 2020<br>
-<b>July 2020 </b> - I will be joining Ipsos Public Affairs in New York City<br> -->
+    var cw = $('#paint').width();
+    $('#paint').css({'height': cw + 'px'});
 
-<style>
-table, th, td {
-  border: 0px solid black;
-   font-size: 18px
-}
-</style>
+    cw = $('#number').width();
+    $('#number').css({'height': cw + 'px'});
 
-<table>
- 
-  <tr>
-    <td><b> July 2019</b></td>
-    <td></td>
-    <td>Left Ipsos, active on job market</td>
-  </tr>
-  
-  <tr>
-    <td><b> June 2020</b></td>
-    <td></td>
-    <td> Our paper on Neural Information Retrieval from CT text reports using Convolutional Neural Network is accepted at Plos One.</td>
-  </tr>
- 
- <tr>
-    <td><b> Nov 2019</b></td>
-    <td></td>
-    <td>Our poster on Survey of deep learning based natural language processing for social media insights is accepted at Americal Association of Public Opinion Research, 2020.</td>
-  </tr>
-  
-  <tr>
-    <td><b> June 2019</b></td>
-    <td></td>
-    <td> I will be leaving Weill Cornell Medicine and joining Ipsos Public Affairs in New York City</td>
-  </tr>
- 
- 
- 
- 
- 
-</table>
+    // From https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
 
-<h1 id="education">Education</h1>
-<p>Ph.D., Machine Learning
-<br /><b>University of British Columbia,                                  2021- </b></p>
+    var compuetedStyle = getComputedStyle(document.getElementById('paint'));
+    canvas.width = parseInt(compuetedStyle.getPropertyValue('width'));
+    canvas.height = parseInt(compuetedStyle.getPropertyValue('height'));
 
-<p>M.S., Computer Science 
-<br /><b>Rutgers University,                                                    2017</b></p>
+    var mouse = {x: 0, y: 0};
 
-<p>B. Eng., Electronics and Telecommunication 
-<br /><b>Shri G.S. Institute of Tech and Science,                    2015</b></p>
+    canvas.addEventListener('mousemove', function(e) {
+      mouse.x = e.pageX - this.offsetLeft;
+      mouse.y = e.pageY - this.offsetTop;
+    }, false);
 
-<h1 id="experience">Experience</h1>
-<p>Senior Machine Learning Scientist <i> &nbsp;&nbsp; July 2019 to July 2020 </i>
-  <br /> <b> Ipsos Public Affairs, New York </b> </p>
-<p> Machine Learning Scientist <i>         &nbsp;&nbsp;     Feb 2016 to June 2019 </i>
-  <br /> <b> Weill Cornell Medicine, New York </b> </p>
-<p>Software Developer, AI <i>         &nbsp;&nbsp;     June 2016 to June 2019 </i>
-  <br /> <b> Cariclub Inc, New York </b> </p>
+    context.lineWidth = isMobile ? 60 : 25;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.strokeStyle = '#0000FF';
 
+    canvas.addEventListener('mousedown', function(e) {
+      context.moveTo(mouse.x, mouse.y);
+      context.beginPath();
+      canvas.addEventListener('mousemove', onPaint, false);
+    }, false);
+
+    canvas.addEventListener('mouseup', function() {
+      // $('#number').html('<img id="spinner" src="spinner.gif"/>');
+      canvas.removeEventListener('mousemove', onPaint, false);
+      var img = new Image();
+      img.onload = function() {
+        context.drawImage(img, 0, 0, 28, 28);
+        data = context.getImageData(0, 0, 28, 28).data;
+        var input = [];
+        for(var i = 0; i < data.length; i += 4) {
+          input.push(data[i + 2] / 255);
+        }
+        predict(input);
+      };
+      img.src = canvas.toDataURL('image/png');
+    }, false);
+
+    var onPaint = function() {
+      context.lineTo(mouse.x, mouse.y);
+      context.stroke();
+    };
+
+    tf.loadLayersModel('model/digit-class/model.json').then(function(model) {
+      window.model = model;
+    });
+
+    // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
+    // Set up touch events for mobile, etc
+    canvas.addEventListener('touchstart', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+    canvas.addEventListener('touchend', function (e) {
+      canvas.dispatchEvent(new MouseEvent('mouseup', {}));
+    }, false);
+    canvas.addEventListener('touchmove', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+
+    var predict = function(input) {
+      if (window.model) {
+        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+          scores = scores[0];
+          predicted = scores.indexOf(Math.max(...scores));
+          $('#number').html(predicted);
+        });
+      } else {
+        // The model takes a bit to load, if we are too fast, wait
+        setTimeout(function(){predict(input)}, 50);
+      }
+    }
+
+    $('#clear').click(function(){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      $('#number').html('');
+    });
+    </script>
+  </body>
+</html>
 
         
       </section>
@@ -354,11 +475,48 @@ table, th, td {
         
 
 
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#image-classification" class="page__taxonomy-item" rel="tag">Image Classification</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#mnist" class="page__taxonomy-item" rel="tag">MNIST</a>
+    
+    </span>
+  </p>
+
+
 
 
       </footer>
 
       
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
 
       
 

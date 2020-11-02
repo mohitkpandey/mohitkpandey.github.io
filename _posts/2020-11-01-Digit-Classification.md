@@ -1,11 +1,22 @@
+---
+title: 'Digit Classification'
+date: 2020-11-01
+permalink: ./ 
+excerpt_separator: <!--more-->
+tags:
+  - Image Classification
+  - MNIST
+---
+
 <b>Digit Recognition using Deep Learning</b>
 <br>
 Webapp to recognize handwritten digits between 0 and 9. Model trained 
 using Keras and served using Tensorflow.js
+<!--more-->
 
 
-<html lang="en">
-  <head>
+<html>
+<head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
     <script>
@@ -15,64 +26,67 @@ using Keras and served using Tensorflow.js
 
       gtag('config', 'G-H0NW5Z2MYC');
     </script>
-    
+    <title>Digit Recognition WebApp</title>
+    <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js">
+    <meta name="keywords" content="Machine Learning, TensorFlow.js">
+    <meta name="author" content="Mohit Pandey">
     <style>
       body {
         touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
         font-family: "Roboto";
       }
-      h1 {
+     /* h1 {
         margin: 50px;
         font-size: 70px;
         text-align: center;
       }
-      #paint {
+*/      #paint {
         border:3px solid red;
         margin: auto;
       }
       #predicted { 
-        font-size: 20px;
-        margin-top: 20px;
+        font-size: 18px;
+        margin-top: 5px;
         text-align: center;
       }
       #number {
         border: 3px solid black;
         margin: auto;
-        margin-top: 1px;
+        margin-top: 5px;
         text-align: center;
         vertical-align: middle;
       }
-      /*#clear {
-        border: none;
-  color: green;
-  padding: 1px 2px;
-      }*/
-      
+      #clear {
+        margin: auto;
+        margin-top: 5px;
+        padding: 5px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
-<!--     <h2>Digit Recognition WebApp</h2>
- -->    <div id="paint">
+<!--     <h1>Digit Recognition WebApp</h1> -->
+    <div id="paint">
       <canvas id="myCanvas"></canvas>
     </div>
     <div id="predicted">
       Recognized digit
       <div id="number"></div>
-      <button id ='clear' >Clear</button>
+      <button id="clear">Clear</button>
     </div>
     <script>
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (isMobile) {
       $('#paint').css({'width': '60%'});
       $('#number').css({'width': '30%', 'font-size': '240px'});
-      $('#clear').css({'font-size': '15px'});
+      $('#clear').css({'font-size': '18px'});
     } else {
       $('#paint').css({'width': '300px'});
       $('#number').css({'width': '150px', 'font-size': '120px'});
-      $('#clear').css({'font-size': '15px'});
+      $('#clear').css({'font-size': '18px'});
     }
 
     var cw = $('#paint').width();
@@ -108,7 +122,7 @@ using Keras and served using Tensorflow.js
     }, false);
 
     canvas.addEventListener('mouseup', function() {
-      $('#number').html('<img id="spinner" src="spinner.gif"/>');
+      // $('#number').html('<img id="spinner" src="spinner.gif"/>');
       canvas.removeEventListener('mousemove', onPaint, false);
       var img = new Image();
       img.onload = function() {
@@ -128,7 +142,7 @@ using Keras and served using Tensorflow.js
       context.stroke();
     };
 
-    tf.loadLayersModel('model/model.json').then(function(model) {
+    tf.loadLayersModel('model/digit-class/model.json').then(function(model) {
       window.model = model;
     });
 
@@ -170,35 +184,5 @@ using Keras and served using Tensorflow.js
       $('#number').html('');
     });
     </script>
-
-
-
-<!-- Non ML related formatting  -->
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
-
-
   </body>
 </html>

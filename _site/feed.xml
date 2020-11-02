@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://mohitkpandey.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mohitkpandey.github.io/" rel="alternate" type="text/html" /><updated>2020-11-01T15:25:27-06:00</updated><id>https://mohitkpandey.github.io/feed.xml</id><title type="html">Mohit Pandey</title><subtitle>Ph.D. Candidate</subtitle><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><entry><title type="html">Digit Classification</title><link href="https://mohitkpandey.github.io/Digit-Classification/" rel="alternate" type="text/html" title="Digit Classification" /><published>2020-11-01T00:00:00-05:00</published><updated>2020-11-01T00:00:00-05:00</updated><id>https://mohitkpandey.github.io/Digit-Classification</id><content type="html" xml:base="https://mohitkpandey.github.io/Digit-Classification/">&lt;b&gt;Digit Recognition using Deep Learning&lt;/b&gt;
-&lt;br&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://mohitkpandey.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mohitkpandey.github.io/" rel="alternate" type="text/html" /><updated>2020-11-01T18:42:21-06:00</updated><id>https://mohitkpandey.github.io/feed.xml</id><title type="html">Mohit Pandey</title><subtitle>Ph.D. Candidate</subtitle><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><entry><title type="html">Digit Classification</title><link href="https://mohitkpandey.github.io/" rel="alternate" type="text/html" title="Digit Classification" /><published>2020-11-01T00:00:00-05:00</published><updated>2020-11-01T00:00:00-05:00</updated><id>https://mohitkpandey.github.io/Digit-Classification</id><content type="html" xml:base="https://mohitkpandey.github.io/">&lt;p&gt;&lt;b&gt;Digit Recognition using Deep Learning&lt;/b&gt;
+&lt;br /&gt;
 Webapp to recognize handwritten digits between 0 and 9. Model trained 
 using Keras and served using Tensorflow.js
+&lt;!--more--&gt;&lt;/p&gt;
 
-
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
+&lt;html&gt;
+&lt;head&gt;
     &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
-    &lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC&quot;&gt;&lt;/script&gt;
+    &lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC&quot;&gt;&lt;/script&gt;
     &lt;script&gt;
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -15,64 +15,67 @@ using Keras and served using Tensorflow.js
 
       gtag('config', 'G-H0NW5Z2MYC');
     &lt;/script&gt;
-    
+    &lt;title&gt;Digit Recognition WebApp&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;Testing Simple Machine Learning Model into an WebApp using TensorFlow.js&quot; /&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;Machine Learning, TensorFlow.js&quot; /&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Mohit Pandey&quot; /&gt;
     &lt;style&gt;
       body {
         touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
         font-family: &quot;Roboto&quot;;
       }
-      h1 {
+     /* h1 {
         margin: 50px;
         font-size: 70px;
         text-align: center;
       }
-      #paint {
+*/      #paint {
         border:3px solid red;
         margin: auto;
       }
       #predicted { 
-        font-size: 20px;
-        margin-top: 20px;
+        font-size: 18px;
+        margin-top: 5px;
         text-align: center;
       }
       #number {
         border: 3px solid black;
         margin: auto;
-        margin-top: 1px;
+        margin-top: 5px;
         text-align: center;
         vertical-align: middle;
       }
-      /*#clear {
-        border: none;
-  color: green;
-  padding: 1px 2px;
-      }*/
-      
+      #clear {
+        margin: auto;
+        margin-top: 5px;
+        padding: 5px;
+        text-align: center;
+      }
     &lt;/style&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;!--&lt;script type=&quot;text/javascript&quot; src=&quot;http://livejs.com/live.js&quot;&gt;&lt;/script&gt;--&gt;
     &lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js&quot;&gt;&lt;/script&gt;
-&lt;!--     &lt;h2&gt;Digit Recognition WebApp&lt;/h2&gt;
- --&gt;    &lt;div id=&quot;paint&quot;&gt;
+&lt;!--     &lt;h1&gt;Digit Recognition WebApp&lt;/h1&gt; --&gt;
+    &lt;div id=&quot;paint&quot;&gt;
       &lt;canvas id=&quot;myCanvas&quot;&gt;&lt;/canvas&gt;
     &lt;/div&gt;
     &lt;div id=&quot;predicted&quot;&gt;
       Recognized digit
       &lt;div id=&quot;number&quot;&gt;&lt;/div&gt;
-      &lt;button id ='clear' &gt;Clear&lt;/button&gt;
+      &lt;button id=&quot;clear&quot;&gt;Clear&lt;/button&gt;
     &lt;/div&gt;
     &lt;script&gt;
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (isMobile) {
       $('#paint').css({'width': '60%'});
       $('#number').css({'width': '30%', 'font-size': '240px'});
-      $('#clear').css({'font-size': '15px'});
+      $('#clear').css({'font-size': '18px'});
     } else {
       $('#paint').css({'width': '300px'});
       $('#number').css({'width': '150px', 'font-size': '120px'});
-      $('#clear').css({'font-size': '15px'});
+      $('#clear').css({'font-size': '18px'});
     }
 
     var cw = $('#paint').width();
@@ -108,7 +111,7 @@ using Keras and served using Tensorflow.js
     }, false);
 
     canvas.addEventListener('mouseup', function() {
-      $('#number').html('&lt;img id=&quot;spinner&quot; src=&quot;spinner.gif&quot;/&gt;');
+      // $('#number').html('&lt;img id=&quot;spinner&quot; src=&quot;spinner.gif&quot;/&gt;');
       canvas.removeEventListener('mousemove', onPaint, false);
       var img = new Image();
       img.onload = function() {
@@ -128,7 +131,7 @@ using Keras and served using Tensorflow.js
       context.stroke();
     };
 
-    tf.loadLayersModel('model/model.json').then(function(model) {
+    tf.loadLayersModel('model/digit-class/model.json').then(function(model) {
       window.model = model;
     });
 
@@ -170,35 +173,5 @@ using Keras and served using Tensorflow.js
       $('#number').html('');
     });
     &lt;/script&gt;
-
-
-
-&lt;!-- Non ML related formatting  --&gt;
-
-&lt;script&gt;
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-&lt;/script&gt;
-
-
-&lt;script&gt;
-  (function () {
-    var script = document.createElement(&quot;script&quot;);
-    script.type = &quot;text/javascript&quot;;
-    script.src  = &quot;https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;;
-    document.getElementsByTagName(&quot;head&quot;)[0].appendChild(script);
-  })();
-&lt;/script&gt;
-
-
-
   &lt;/body&gt;
-&lt;/html&gt;</content><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><summary type="html">Digit Recognition using Deep Learning Webapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js</summary></entry></feed>
+&lt;/html&gt;</content><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><category term="Image Classification" /><category term="MNIST" /><summary type="html">Digit Recognition using Deep Learning Webapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js</summary></entry></feed>
