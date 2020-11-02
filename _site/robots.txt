@@ -1,1 +1,1 @@
-Sitemap: https://mohitkpandey.github.io/sitemap.xml
+Sitemap: https://mohitpandey.netlify.app/sitemap.xml
