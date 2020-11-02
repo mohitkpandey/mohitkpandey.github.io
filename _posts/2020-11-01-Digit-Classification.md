@@ -1,7 +1,7 @@
 ---
 title: 'Digit Classification'
 date: 2020-11-01
-permalink: ./ 
+permalink: /posts/2020/11/digit-class
 excerpt_separator: <!--more-->
 tags:
   - Image Classification
@@ -142,7 +142,7 @@ using Keras and served using Tensorflow.js
       context.stroke();
     };
 
-    tf.loadLayersModel('model/digit-class/model.json').then(function(model) {
+    tf.loadLayersModel('../../../files/model/digit-class/model.json').then(function(model) {
       window.model = model;
     });
 

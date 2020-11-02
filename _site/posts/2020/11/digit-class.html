@@ -19,7 +19,7 @@
 
 
 
-<title>Measurement - Mohit Pandey</title>
+<title>Digit Classification - Mohit Pandey</title>
 
 
 
@@ -29,15 +29,15 @@
 
 <meta property="og:locale" content="en-US">
 <meta property="og:site_name" content="Mohit Pandey">
-<meta property="og:title" content="Measurement">
+<meta property="og:title" content="Digit Classification">
 
 
-  <link rel="canonical" href="https://mohitkpandey.github.io/research/measurement/">
-  <meta property="og:url" content="https://mohitkpandey.github.io/research/measurement/">
+  <link rel="canonical" href="https://mohitkpandey.github.io/posts/2020/11/digit-class">
+  <meta property="og:url" content="https://mohitkpandey.github.io/posts/2020/11/digit-class">
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Digit Recognition using Deep LearningWebapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js">
 
 
 
@@ -52,7 +52,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-11-01T19:10:00-06:00">
+  <meta property="article:published_time" content="2020-11-01T00:00:00-05:00">
 
 
 
@@ -256,18 +256,29 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Measurement">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="Digit Classification">
+    <meta itemprop="description" content="Digit Recognition using Deep LearningWebapp to recognize handwritten digits between 0 and 9. Model trained using Keras and served using Tensorflow.js">
     <meta itemprop="datePublished" content="November 01, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Measurement
+          <h1 class="page__title" itemprop="headline">Digit Classification
 </h1>
           
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
+          
         
+        
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-01T00:00:00-05:00">November 01, 2020</time></p>
         
         
              
@@ -277,43 +288,184 @@
       
 
       <section class="page__content" itemprop="text">
-        <p>In this set of projects, I use advanced quanitative methods to tackle the problem of more accurately measuring concepts of interest in international relations. One uses Bayesian latent variable models to directly assess the strength of peace agreements in civil conflict rather than having to use agreement duration as a proxy for strength. Another harnesses advances in big data and develops new measures of economic interdependence and methods for detecting disruptions of regular economic exchange between states from a product-level trade dataset with over two billion observations.</p>
+        
+        <p><b>Digit Recognition using Deep Learning</b>
+<br />
+Webapp to recognize handwritten digits between 0 and 9. Model trained 
+using Keras and served using Tensorflow.js
+<!--more--></p>
 
-<h2 id="article">Article</h2>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<p>Rob Williams, Daniel Gustafson, Stephen Gent, and Mark Crescenzi. “A Latent Variable Approach to Measuring and Explaining Peace Agreement Strength.” Forthcoming, <em>Political Science Research and Methods</em>.</p>
+      gtag('config', 'G-H0NW5Z2MYC');
+    </script>
+    <title>Digit Recognition WebApp</title>
+    <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
+    <meta name="keywords" content="Machine Learning, TensorFlow.js" />
+    <meta name="author" content="Mohit Pandey" />
+    <style>
+      body {
+        touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
+        font-family: "Roboto";
+      }
+     /* h1 {
+        margin: 50px;
+        font-size: 70px;
+        text-align: center;
+      }
+*/      #paint {
+        border:3px solid red;
+        margin: auto;
+      }
+      #predicted { 
+        font-size: 18px;
+        margin-top: 5px;
+        text-align: center;
+      }
+      #number {
+        border: 3px solid black;
+        margin: auto;
+        margin-top: 5px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #clear {
+        margin: auto;
+        margin-top: 5px;
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+<!--     <h1>Digit Recognition WebApp</h1> -->
+    <div id="paint">
+      <canvas id="myCanvas"></canvas>
+    </div>
+    <div id="predicted">
+      Recognized digit
+      <div id="number"></div>
+      <button id="clear">Clear</button>
+    </div>
+    <script>
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      $('#paint').css({'width': '60%'});
+      $('#number').css({'width': '30%', 'font-size': '240px'});
+      $('#clear').css({'font-size': '18px'});
+    } else {
+      $('#paint').css({'width': '300px'});
+      $('#number').css({'width': '150px', 'font-size': '120px'});
+      $('#clear').css({'font-size': '18px'});
+    }
 
-<blockquote>
-  <p>Much of the peace agreement durability literature assumes that stronger peace agreements are more likely to survive the trials of the post-conflict environment. This work does an excellent job identifying which provisions indicate that agreements are more likely to endure. However, there is no widely accepted way to directly measure the strength of agreements, and existing measures suffer from a lack of nuance or reliance on subjective weighting. We use a Bayesian item response theory model to develop a principled measure of the latent strength of peace agreements in civil conflicts from 1975-2005. We illustrate the measure’s utility by exploring how various international factors such as sanctions and mediation contribute to the strength or weakness of agreements.</p>
-</blockquote>
+    var cw = $('#paint').width();
+    $('#paint').css({'height': cw + 'px'});
 
-<p><a href="https://doi.org/10.1017/psrm.2019.23" class="btn--research">Article</a> <a href="/files/pdf/research/Agreement Strength Accepted.pdf" class="btn--research">Preprint</a> <a href="/files/pdf/research/Agreement Strength SI.pdf" class="btn--research">Supplemental Information</a> <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FVUY8UI" class="btn--research">Replication Archive</a> <a href="https://github.com/jayrobwilliams/Peace-Agreement-Strength" class="btn--research">GitHub Repo</a></p>
+    cw = $('#number').width();
+    $('#number').css({'height': cw + 'px'});
 
-<h2 id="working-papers">Working papers</h2>
+    // From https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
 
-<p>Rob Williams. “PASS: Peace Agreement Strength Scores.”</p>
+    var compuetedStyle = getComputedStyle(document.getElementById('paint'));
+    canvas.width = parseInt(compuetedStyle.getPropertyValue('width'));
+    canvas.height = parseInt(compuetedStyle.getPropertyValue('height'));
 
-<blockquote>
-  <p>This paper presents the Peace Agreement Strength Scores (PASS) of peace agreements in civil conflicts. The scores capture the strength of peace agreements at the time of signing and can be used to avoid relying on the duration of agreement survival as a proxy for agreement strength. The scores are used to show descriptively that stronger peace agreements tend to be signed in more intractable conflicts, suggesting that a selection effect may be at play in the process of agreement signing and duration. The scores are available for all peace agreements signed in UCDP/PRIO civil conflicts from 1975-2018.</p>
-</blockquote>
+    var mouse = {x: 0, y: 0};
 
-<p><a href="/files/pdf/research/PASS.pdf" class="btn--research">Working Paper</a> <a href="/files/pdf/research/PASS SI.pdf" class="btn--research">Supplemental Information</a></p>
+    canvas.addEventListener('mousemove', function(e) {
+      mouse.x = e.pageX - this.offsetLeft;
+      mouse.y = e.pageY - this.offsetTop;
+    }, false);
 
-<p>Bailee Donahue, Rob Williams, and Mark Crescenzi. “Unsettled Borders in a Market Context.” Presented at the Annual Meeting of the Peace Science Society (International), Manhattan, KS, November 2019, the International Studies Association Midwest Annual Conference, St. Louis, MO, November 2019, and the Annual Conference of the American Political Science Association, San Francisco, CA, September, 2020.</p>
+    context.lineWidth = isMobile ? 60 : 25;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.strokeStyle = '#0000FF';
 
-<blockquote>
-  <p>Border disputes between states can be very costly and disruptive, including major disruptions in trade. From an aggregate perspective, scholars traditionally expect these costs and disruptions to place pressure on states to avoid or resolve these disputes quickly. This view, however, risks oversimplification of the quality of trade and the economic actors driving that trade. We investigate the consequences of complex trade relations on border disputes. Variation in the composition of trade, whether characterized by uniqueness on the global market or readily available substitutes, generates variation in the presence and intensity of domestic pressure to avoid or resolve border disputes. We examine the effects of this variation on dispute behavior using an original dataset that combines product-level trade data (spanning from 1962-2001) with ICOW territorial claims data. The use of product-level trade data allows for the analysis of substitutability options which may reduce exit costs and make it easier to escalate border disputes. This analysis helps us better understand the choice to forego trade due to border disputes, and furthers our understanding of the economic impact of unsettled borders.</p>
-</blockquote>
+    canvas.addEventListener('mousedown', function(e) {
+      context.moveTo(mouse.x, mouse.y);
+      context.beginPath();
+      canvas.addEventListener('mousemove', onPaint, false);
+    }, false);
 
-<p><a href="/files/pdf/research/Unsettled_Borders.pdf" class="btn--research">Working Paper</a></p>
+    canvas.addEventListener('mouseup', function() {
+      // $('#number').html('<img id="spinner" src="spinner.gif"/>');
+      canvas.removeEventListener('mousemove', onPaint, false);
+      var img = new Image();
+      img.onload = function() {
+        context.drawImage(img, 0, 0, 28, 28);
+        data = context.getImageData(0, 0, 28, 28).data;
+        var input = [];
+        for(var i = 0; i < data.length; i += 4) {
+          input.push(data[i + 2] / 255);
+        }
+        predict(input);
+      };
+      img.src = canvas.toDataURL('image/png');
+    }, false);
 
-<h2 id="manuscript-in-preparation">Manuscript in preparation</h2>
+    var onPaint = function() {
+      context.lineTo(mouse.x, mouse.y);
+      context.stroke();
+    };
 
-<p>David B. Carter, Bailee Donahue, and Rob Williams. “Border Walls, Cooperation, and Illicit Trade.” To be presented at Annual Conference of the International Political Economy Society, Columbus, OH, November, 2020.</p>
+    tf.loadLayersModel('../../../files/model/digit-class/model.json').then(function(model) {
+      window.model = model;
+    });
 
-<blockquote>
-  <p>In the last twenty years, the number of fortified borders around the world has risen precipitously. A growing body of research shows that cross-border economic inequality drives wealthier states to construct border walls. This surge in walls is further argued to be a reaction to the unwanted “externalities”” of economic openness and globalization, namely, illicit trade and smuggling. While recent studies analyze the effect of walls on legal trade, no studies of which we are aware explore how walls might affect illicit trade. This is a notable omission for two key reasons. First, the most common explanation for wall construction puts combating illicit trade front and center. Second, recent work that finds walls significantly reduce legal trade suggest that this finding derives from border fortifications diverting illegal trade to ports of entry, which leads to more inspection, security, and transaction costs. We begin to fill this gap here by developing new measures of illicit trade flows and assessing their connections to border wall construction and legal trade flows.</p>
-</blockquote>
+    // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
+    // Set up touch events for mobile, etc
+    canvas.addEventListener('touchstart', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+    canvas.addEventListener('touchend', function (e) {
+      canvas.dispatchEvent(new MouseEvent('mouseup', {}));
+    }, false);
+    canvas.addEventListener('touchmove', function (e) {
+      var touch = e.touches[0];
+      canvas.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    }, false);
+
+    var predict = function(input) {
+      if (window.model) {
+        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+          scores = scores[0];
+          predicted = scores.indexOf(Math.max(...scores));
+          $('#number').html(predicted);
+        });
+      } else {
+        // The model takes a bit to load, if we are too fast, wait
+        setTimeout(function(){predict(input)}, 50);
+      }
+    }
+
+    $('#clear').click(function(){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      $('#number').html('');
+    });
+    </script>
+  </body>
+</html>
 
         
       </section>
@@ -321,6 +473,31 @@
       <footer class="page__meta">
         
         
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#image-classification" class="page__taxonomy-item" rel="tag">Image Classification</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#mnist" class="page__taxonomy-item" rel="tag">MNIST</a>
+    
+    </span>
+  </p>
 
 
 
@@ -334,25 +511,15 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/research/measurement/" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/research/measurement/" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/research/measurement/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
       
 
-
-  <nav class="pagination">
-    
-      <a href="https://mohitkpandey.github.io/research/event-data/" class="pagination--pager" title="Event data
-">Previous</a>
-    
-    
-      <a href="#" class="pagination--pager disabled">Next</a>
-    
-  </nav>
 
     </div>
 
