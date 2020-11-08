@@ -16,10 +16,10 @@ I am currently on the job market seeking Research & Developement positions in ma
 
 News
 ======
-<!-- <b> July 2019</b> - Left Ipsos, active on job market <br>
+<!-- <b> July 2020</b> - Left Ipsos, active on job market <br>
 <b>June 2020 </b> - Our paper on Neural Information Retrieval from CT text reports using Convolutional Neural Network is accepted at Plos One. <br>
 <b>Nov 2019</b> - Our poster on Survey of deep learning based natural language processing for social media insights is accepted at Americal Association of Public Opinion Research, 2020<br>
-<b>July 2020 </b> - I will be joining Ipsos Public Affairs in New York City<br> -->
+<b>July 2019 </b> - I will be joining Ipsos Public Affairs in New York City<br> -->
 
 <style>
 table, th, td {
@@ -31,7 +31,7 @@ table, th, td {
 <table>
  
   <tr>
-    <td><b> July 2019</b></td>
+    <td><b> July 2020</b></td>
     <td></td>
     <td>Left Ipsos, active on job market</td>
   </tr>
