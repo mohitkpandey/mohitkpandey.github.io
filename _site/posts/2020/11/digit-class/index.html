@@ -32,8 +32,8 @@
 <meta property="og:title" content="Digit Classification">
 
 
-  <link rel="canonical" href="https://mohitkpandey.github.io/posts/2020/11/digit-class">
-  <meta property="og:url" content="https://mohitkpandey.github.io/posts/2020/11/digit-class">
+  <link rel="canonical" href="https://mohitkpandey.github.io/posts/2020/11/digit-class/">
+  <meta property="og:url" content="https://mohitkpandey.github.io/posts/2020/11/digit-class/">
 
 
 
@@ -297,175 +297,175 @@ using Keras and served using Tensorflow.js
 <!--more--></p>
 
 <html>
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-H0NW5Z2MYC');
-    </script>
-    <title>Digit Recognition WebApp</title>
-    <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
-    <meta name="keywords" content="Machine Learning, TensorFlow.js" />
-    <meta name="author" content="Mohit Pandey" />
-    <style>
-      body {
-        touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
-        font-family: "Roboto";
-      }
-     /* h1 {
-        margin: 50px;
-        font-size: 70px;
-        text-align: center;
-      }
-*/      #paint {
-        border:3px solid red;
-        margin: auto;
-      }
-      #predicted { 
-        font-size: 18px;
-        margin-top: 5px;
-        text-align: center;
-      }
-      #number {
-        border: 3px solid black;
-        margin: auto;
-        margin-top: 5px;
-        text-align: center;
-        vertical-align: middle;
-      }
-      #clear {
-        margin: auto;
-        margin-top: 5px;
-        padding: 5px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
-<!--     <h1>Digit Recognition WebApp</h1> -->
-    <div id="paint">
-      <canvas id="myCanvas"></canvas>
-    </div>
-    <div id="predicted">
-      Recognized digit
-      <div id="number"></div>
-      <button id="clear">Clear</button>
-    </div>
-    <script>
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile) {
-      $('#paint').css({'width': '60%'});
-      $('#number').css({'width': '30%', 'font-size': '240px'});
-      $('#clear').css({'font-size': '18px'});
-    } else {
-      $('#paint').css({'width': '300px'});
-      $('#number').css({'width': '150px', 'font-size': '120px'});
-      $('#clear').css({'font-size': '18px'});
-    }
-
-    var cw = $('#paint').width();
-    $('#paint').css({'height': cw + 'px'});
-
-    cw = $('#number').width();
-    $('#number').css({'height': cw + 'px'});
-
-    // From https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
-    var canvas = document.getElementById('myCanvas');
-    var context = canvas.getContext('2d');
-
-    var compuetedStyle = getComputedStyle(document.getElementById('paint'));
-    canvas.width = parseInt(compuetedStyle.getPropertyValue('width'));
-    canvas.height = parseInt(compuetedStyle.getPropertyValue('height'));
-
-    var mouse = {x: 0, y: 0};
-
-    canvas.addEventListener('mousemove', function(e) {
-      mouse.x = e.pageX - this.offsetLeft;
-      mouse.y = e.pageY - this.offsetTop;
-    }, false);
-
-    context.lineWidth = isMobile ? 60 : 25;
-    context.lineJoin = 'round';
-    context.lineCap = 'round';
-    context.strokeStyle = '#0000FF';
-
-    canvas.addEventListener('mousedown', function(e) {
-      context.moveTo(mouse.x, mouse.y);
-      context.beginPath();
-      canvas.addEventListener('mousemove', onPaint, false);
-    }, false);
-
-    canvas.addEventListener('mouseup', function() {
-      // $('#number').html('<img id="spinner" src="spinner.gif"/>');
-      canvas.removeEventListener('mousemove', onPaint, false);
-      var img = new Image();
-      img.onload = function() {
-        context.drawImage(img, 0, 0, 28, 28);
-        data = context.getImageData(0, 0, 28, 28).data;
-        var input = [];
-        for(var i = 0; i < data.length; i += 4) {
-          input.push(data[i + 2] / 255);
-        }
-        predict(input);
-      };
-      img.src = canvas.toDataURL('image/png');
-    }, false);
-
-    var onPaint = function() {
-      context.lineTo(mouse.x, mouse.y);
-      context.stroke();
-    };
-
-    tf.loadLayersModel('../../../files/model/digit-class/model.json').then(function(model) {
-      window.model = model;
-    });
-
-    // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
-    // Set up touch events for mobile, etc
-    canvas.addEventListener('touchstart', function (e) {
-      var touch = e.touches[0];
-      canvas.dispatchEvent(new MouseEvent('mousedown', {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-      }));
-    }, false);
-    canvas.addEventListener('touchend', function (e) {
-      canvas.dispatchEvent(new MouseEvent('mouseup', {}));
-    }, false);
-    canvas.addEventListener('touchmove', function (e) {
-      var touch = e.touches[0];
-      canvas.dispatchEvent(new MouseEvent('mousemove', {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-      }));
-    }, false);
-
-    var predict = function(input) {
-      if (window.model) {
-        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
-          scores = scores[0];
-          predicted = scores.indexOf(Math.max(...scores));
-          $('#number').html(predicted);
-        });
-      } else {
-        // The model takes a bit to load, if we are too fast, wait
-        setTimeout(function(){predict(input)}, 50);
-      }
-    }
-
-    $('#clear').click(function(){
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      $('#number').html('');
-    });
-    </script>
-  </body>
+   <head>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <!-- <script  src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script> -->
+      <!-- <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'G-H0NW5Z2MYC');
+      </script> -->
+      <title>Digit Recognition WebApp</title>
+      <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
+      <meta name="keywords" content="Machine Learning, TensorFlow.js" />
+      <meta name="author" content="Mohit Pandey" />
+      <style>
+         body {
+         touch-action: none; /*https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action*/
+         font-family: "Roboto";
+         }
+         h1 {
+         margin: 50px;
+         font-size: 70px;
+         text-align: center;
+         }
+         #paint {
+         border:3px solid red;
+         margin: auto;
+         }
+         #predicted { 
+         font-size: 18px;
+         margin-top: 5px;
+         text-align: center;
+         }
+         #number {
+         border: 3px solid black;
+         margin: auto;
+         margin-top: 5px;
+         text-align: center;
+         vertical-align: middle;
+         }
+         #clear {
+         margin: auto;
+         margin-top: 5px;
+         padding: 5px;
+         text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
+      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+      <!--     <h1>Digit Recognition WebApp</h1> -->
+      <div id="paint">
+         <canvas id="myCanvas"></canvas>
+      </div>
+      <div id="predicted">
+         Recognized digit
+         <div id="number"></div>
+         <button id="clear">Clear</button>
+      </div>
+      <script>
+         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+         if (isMobile) {
+           $('#paint').css({'width': '100%'});
+           $('#number').css({'width': '30%', 'font-size': '50px'});
+           $('#clear').css({'font-size': '18px'});
+         } else {
+           $('#paint').css({'width': '300px'});
+           $('#number').css({'width': '150px', 'font-size': '120px'});
+           $('#clear').css({'font-size': '18px'});
+         }
+         
+         var cw = $('#paint').width();
+         $('#paint').css({'height': cw + 'px'});
+         
+         cw = $('#number').width();
+         $('#number').css({'height': cw + 'px'});
+         
+         // From https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
+         var canvas = document.getElementById('myCanvas');
+         var context = canvas.getContext('2d');
+         
+         var compuetedStyle = getComputedStyle(document.getElementById('paint'));
+         canvas.width = parseInt(compuetedStyle.getPropertyValue('width'));
+         canvas.height = parseInt(compuetedStyle.getPropertyValue('height'));
+         
+         var mouse = {x: 0, y: 0};
+         
+         canvas.addEventListener('mousemove', function(e) {
+           mouse.x = e.pageX - this.offsetLeft;
+           mouse.y = e.pageY - this.offsetTop;
+         }, false);
+         
+         context.lineWidth = isMobile ? 20 : 25;
+         context.lineJoin = 'round';
+         context.lineCap = 'round';
+         context.strokeStyle = '#0000FF';
+         
+         canvas.addEventListener('mousedown', function(e) {
+           context.moveTo(mouse.x, mouse.y);
+           context.beginPath();
+           canvas.addEventListener('mousemove', onPaint, false);
+         }, false);
+         
+         canvas.addEventListener('mouseup', function() {
+           // $('#number').html('<img id="spinner" src="spinner.gif"/>');
+           canvas.removeEventListener('mousemove', onPaint, false);
+           var img = new Image();
+           img.onload = function() {
+             context.drawImage(img, 0, 0, 28, 28);
+             data = context.getImageData(0, 0, 28, 28).data;
+             var input = [];
+             for(var i = 0; i < data.length; i += 4) {
+               input.push(data[i + 2] / 255);
+             }
+             predict(input);
+           };
+           img.src = canvas.toDataURL('image/png');
+         }, false);
+         
+         var onPaint = function() {
+           context.lineTo(mouse.x, mouse.y);
+           context.stroke();
+         };
+         
+         tf.loadLayersModel('../../../../files/model/digit-class/model.json').then(function(model) {
+           window.model = model;
+         });
+         
+         // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
+         // Set up touch events for mobile, etc
+         canvas.addEventListener('touchstart', function (e) {
+           var touch = e.touches[0];
+           canvas.dispatchEvent(new MouseEvent('mousedown', {
+             clientX: touch.clientX,
+             clientY: touch.clientY
+           }));
+         }, false);
+         canvas.addEventListener('touchend', function (e) {
+           canvas.dispatchEvent(new MouseEvent('mouseup', {}));
+         }, false);
+         canvas.addEventListener('touchmove', function (e) {
+           var touch = e.touches[0];
+           canvas.dispatchEvent(new MouseEvent('mousemove', {
+             clientX: touch.clientX,
+             clientY: touch.clientY
+           }));
+         }, false);
+         
+         var predict = function(input) {
+           if (window.model) {
+             window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+               scores = scores[0];
+               predicted = scores.indexOf(Math.max(...scores));
+               $('#number').html(predicted);
+             });
+           } else {
+             // The model takes a bit to load, if we are too fast, wait
+             setTimeout(function(){predict(input)}, 50);
+           }
+         }
+         
+         $('#clear').click(function(){
+           context.clearRect(0, 0, canvas.width, canvas.height);
+           $('#number').html('');
+         });
+      </script>
+   </body>
 </html>
 
         
@@ -495,7 +495,11 @@ using Keras and served using Tensorflow.js
     
       
       
-      <a href="https://mohitkpandey.github.io/tags/#mnist" class="page__taxonomy-item" rel="tag">MNIST</a>
+      <a href="https://mohitkpandey.github.io/tags/#mnist" class="page__taxonomy-item" rel="tag">MNIST</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#tensorflow-js" class="page__taxonomy-item" rel="tag">Tensorflow-JS</a>
     
     </span>
   </p>
@@ -512,11 +516,11 @@ using Keras and served using Tensorflow.js
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/posts/2020/11/digit-class/" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/posts/2020/11/digit-class/" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/posts/2020/11/digit-class" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/posts/2020/11/digit-class/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
       
@@ -556,6 +560,51 @@ using Keras and served using Tensorflow.js
       
           
           
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="permalink">TFJS My NER
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p><b>NER hosted with TFJS</b>
+<br />
+Epsum lorem blah blah</p>
+
+</p>
+    
+    
+  </article>
+</div>
+
+            
+            
           
           
         
