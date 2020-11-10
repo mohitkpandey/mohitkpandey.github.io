@@ -19,7 +19,7 @@
 
 
 
-<title>TFJS My NER - Mohit Pandey</title>
+<title>Named entity recognition with simple Attention - Mohit Pandey</title>
 
 
 
@@ -29,7 +29,7 @@
 
 <meta property="og:locale" content="en-US">
 <meta property="og:site_name" content="Mohit Pandey">
-<meta property="og:title" content="TFJS My NER">
+<meta property="og:title" content="Named entity recognition with simple Attention">
 
 
   <link rel="canonical" href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/">
@@ -37,7 +37,7 @@
 
 
 
-  <meta property="og:description" content="NER hosted with TFJSEpsum lorem blah blah">
+  <meta property="og:description" content="NER implementation hosted within browser using Tensorflow-JS.Named-entity recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.Demo">
 
 
 
@@ -257,22 +257,22 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="TFJS My NER">
-    <meta itemprop="description" content="NER hosted with TFJSEpsum lorem blah blah">
+    <meta itemprop="headline" content="Named entity recognition with simple Attention">
+    <meta itemprop="description" content="NER implementation hosted within browser using Tensorflow-JS.Named-entity recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.Demo">
     <meta itemprop="datePublished" content="November 10, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">TFJS My NER
+          <h1 class="page__title" itemprop="headline">Named entity recognition with simple Attention
 </h1>
           
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
 
 
   
-	  less than 1 minute read
+	  1 minute read
 	
 </p>
           
@@ -290,23 +290,27 @@
 
       <section class="page__content" itemprop="text">
         
-        <p><b>NER hosted with TFJS</b>
-<br />
-Epsum lorem blah blah
-<!--more--></p>
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-align-justify"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#demo">Demo</a></li>
+  <li><a href="#further-reading">Further reading….</a></li>
+  <li><a href="#code">Code</a></li>
+</ul>
 
-<html>
-   <head>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         
-         gtag('config', 'G-H0NW5Z2MYC');
-      </script>
-      <title>Digit Recognition WebApp</title>
+            </nav>
+          </aside>
+        
+        <p>NER implementation hosted within browser using Tensorflow-JS.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Named-entity recognition</a> is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
+See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Continue reading for model explanation and code.</p>
+
+<h4 id="demo">Demo</h4>
+<!--more-->
+
+<head>
       <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
       <meta name="keywords" content="Machine Learning, TensorFlow.js" />
       <meta name="author" content="Mohit Pandey" />
@@ -316,7 +320,7 @@ Epsum lorem blah blah
       <meta name="description" content="TensorFlow js demo for Named-entity recognition (NER) (Sequence Tagging task). Implemented with Keras (GloVe + GRU RNN) and tensorflow.js" />
       <meta property="og:title" content="Named-entity recognition TensorFlow.js demo" />
       <meta property="og:description" content="TensorFlow js demo for Named-entity recognition (NER) (Sequence Tagging task). Implemented with Keras (GloVe + GRU RNN) and tensorflow.js" />
-      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
       <style>
          .demo {
          margin: 2em auto;
@@ -328,47 +332,46 @@ Epsum lorem blah blah
          padding: 1em;
          }
          .demo-header {
-         font-size: 1.5rem;
-         margin: 1em;
+         font-size: 1.0rem;
+         margin: 0.5em;
          }
          .tags-review {
          margin-top: 1.5rem;
          }
+         .divider{
+          width:5px;
+          height:auto;
+          display:inline-block;
+          }
+         .btn-primary { background-color: red; }
+
       </style>
-      <script>
-         function clearForm()
-         {
-             document.getElementById("input_text").value=''
-         
-         }
-      </script>
+      
    </head>
-   <body>
+<body>
       <!--  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script> -->
       <main role="main" class="container">
-         <h1 itemprop="name headline">Named-entity recognition</h1>
-         <h2>TensorFlow.js demo</h2>
-         <hr class="my-4" />
          <p>
-            Enter sentence like <code>The European Commission said that nuclear Energy may be dangerous.</code>
-            or <code>I like Moscow!</code>.
+            Enter sentence like <code>Fischler proposed EU-wide measures after reports from Britain and France that under laboratory conditions sheep could contract bovine spongiform encephalopathy.</code>
+            or <code>She likes David!</code>.
          </p>
          <div class="card demo">
             <div class="card-header">
-               <h1 class="demo-header">
-                  NER demo in your browser
-                  <div class="loading-model spinner-border text-primary" role="status">
+               <!-- <h1 class="demo-header">
+                  Dehcmcmo! -->
+                  <!-- <div class="loading-model spinner-border text-primary" role="status">
                      <span class="sr-only">Loading...</span>
-                  </div>
-               </h1>
+                  </div> -->
+               <!-- </h1> -->
                <form class="form" onkeypress="return event.keyCode != 13;">
                   <div class="form-group mx-sm-3 md-2">
-                     <input type="text" class="form-control form-control-xs" id="input_text" placeholder="I Like Moscow!" />
+                     <input type="text" class="form-control form-control-xs" id="input_text" placeholder="Enter short sentence" />
                   </div>
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-primary" id="get_ner_button">Search Entities</button>
-                     <button type="button" class="btn btn-primary" id="clear_bttn" onclick="clearForm()">Clear</button>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <button type="button" class="btn btn-primary" id="clear_bttn">Clear</button>
                   </div>
                </form>
             </div>
@@ -384,56 +387,24 @@ Epsum lorem blah blah
       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="../../../../files/model/tfjs-ner/vocabs.js"></script>
       <script src="../../../../files/model/tfjs-ner/predict.js"></script>
-      <script>
-         // canvas.addEventListener('mouseup', function() {
-         // // $('#number').html('<img id="spinner" src="spinner.gif"/>');
-         // canvas.removeEventListener('mousemove', onPaint, false);
-         // var img = new Image();
-         // img.onload = function() {
-         //   context.drawImage(img, 0, 0, 28, 28);
-         //   data = context.getImageData(0, 0, 28, 28).data;
-         //   var input = [];
-         //   for(var i = 0; i < data.length; i += 4) {
-         //     input.push(data[i + 2] / 255);
-         //   }
-         //   predict(input);
-         // };
-         // img.src = canvas.toDataURL('image/png');
-         // }, false);
-         
-         // var onPaint = function() {
-         // context.lineTo(mouse.x, mouse.y);
-         // context.stroke();
-         // };
-         
-         // tf.loadLayersModel('../../../files/model/digit-class/model.json').then(function(model) {
-         // window.model = model;
-         // });
-         
-         // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
-         // Set up touch events for mobile, etc
-         
-         
-         // var predict = function(input) {
-         // if (window.model) {
-         //   window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
-         //     scores = scores[0];
-         //     predicted = scores.indexOf(Math.max(...scores));
-         //     $('#number').html(predicted);
-         //   });
-         // } else {
-         //   // The model takes a bit to load, if we are too fast, wait
-         //   setTimeout(function(){predict(input)}, 50);
-         // }
-         // }
-         
-         // $('#clear').click(function(){
-         // context.clearRect(0, 0, canvas.width, canvas.height);
-         // $('#number').html('');
-         // });
-      </script>
+      
    </body>
-</html>
+
+<h4 id="further-reading">Further reading….</h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Diam sollicitudin tempor id eu nisl nunc mi. Pulvinar proin gravida hendrerit lectus. Volutpat est velit egestas dui id ornare arcu. Nec feugiat in fermentum posuere urna nec tincidunt. Accumsan tortor posuere ac ut. Nam at lectus urna duis convallis convallis tellus. Metus aliquam eleifend mi in nulla. Facilisis gravida neque convallis a cras semper auctor neque. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id. Est lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<h4 id="code">Code</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s">'./trained_models/model.h5'</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'min'</span><span class="p">)</span>
+<span class="n">callbacks_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">checkpoint</span><span class="p">]</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_X</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">),</span>
+         <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks_list</span><span class="p">)</span>
+</code></pre></div></div>
+
 
         
       </section>
@@ -458,11 +429,23 @@ Epsum lorem blah blah
     
       
       
+      <a href="https://mohitkpandey.github.io/tags/#keras" class="page__taxonomy-item" rel="tag">Keras</a><span class="sep">, </span>
+    
+      
+      
       <a href="https://mohitkpandey.github.io/tags/#nlp" class="page__taxonomy-item" rel="tag">NLP</a><span class="sep">, </span>
     
       
       
-      <a href="https://mohitkpandey.github.io/tags/#tensorflow-js" class="page__taxonomy-item" rel="tag">Tensorflow-JS</a>
+      <a href="https://mohitkpandey.github.io/tags/#rnn" class="page__taxonomy-item" rel="tag">RNN</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#tensorflow-js" class="page__taxonomy-item" rel="tag">Tensorflow-JS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#text-classification" class="page__taxonomy-item" rel="tag">Text Classification</a>
     
     </span>
   </p>
@@ -631,74 +614,6 @@ In this series, I will explore
 various state-of-the-art NLP architectures to build NMT systems algorithms and hope to focus on English to Hindi translation. 
 I will also attempt to provide simplified mathematical explanations of the models as well as implementation details.</p>
 
-<p>First on this list is Sequence-to-Sequence model using encoder-decoder paradigm. Check the <b>DEMO</b> below.</p>
-
-<html>
-<head>
-  
-<script>
-  function sendData()
-  {
-      let request = new XMLHttpRequest();
-      url = "http://127.0.0.1:8008/predict/"+document.getElementById('src').value
-      request.open("GET", url);
-      request.send();
-      request.onload = () => {
-        console.log(request);
-        if (request.status === 200) {
-          // by default the response comes in the string format, we need to parse the data into JSON
-          document.getElementById('trg').value= request.response;//JSON.parse(request.responseText));
-        } else {
-          console.log(`error ${request.status} ${request.statusText}`);
-        }
-      };
-
-  }
-
-</script>
-
-</head>
-<body>
-<h2>Please enter short German sentence</h2>
-Seperate punctuations with a space <i>( zwei junge weiße männer sind im freien in der nähe vieler büsche . )</i>
-<form>
-    <label for="sep_len">Source Sentence</label> <input id="src" name="sep_len" type="text" value="" />
-    <br />
-    <label for="sep_len">Target Sentence</label> <input id="trg" name="sep_len" type="text" value="" />
-    <br />
-    <input type="button" onclick="sendData()" value="Translate" />
-
-</form>
-
-</body>
-</html>
-
-<!-- Much has been written lately about the increasing militarization of US
-law enforcement. One of the most visible indicators of this shift in
-recent decades is the increased frequency of tactical gear and equipment
-worn and carried by police officers. However, this pales in comparison
-to images of police departments bringing armored vehicles to peaceful
-protests.  People often criticize police departments or SWAT
-teams for owning and deploying tanks in situations that don’t warrant
-their use. In reality, these ‘tanks’ are typically [Mine-Resistant
-Ambush Protected](https://en.wikipedia.org/wiki/MRAP) (MRAP) vehicles.
-MRAPs were developed by the US military and produced by various
-manufacturers from 2007-2009. As their name suggests, they are designed
-to protect passengers from an improvised explosive device (IED) attack.
-
-Given the extreme threat they were designed to survive, MRAPs are
-emblematic of increasing police militarization in the US. But how did
-police come to own these military-grade vehicles?
-
-# Where have all the MRAPs gone?
-
-Police departments, sheriff’s offices, and even school districts (the LA
-Unified School District [briefly owned an
-MRAP](https://www.lamag.com/citythinkblog/lausd-keys-mrap-tank/) in 2014
-before [returning it to the Department of
-Defense](https://www.dailynews.com/2014/11/21/lausd-school-police-return-armored-military-vehicle-which-is-now-in-barstow/))
-
- -->
 </p>
     
     
@@ -796,7 +711,7 @@ using Keras and served using Tensorflow.js</p>
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-178627262-1', 'auto');
+  ga('create', 'G-HKRCE9X0YB', 'auto');
   ga('send', 'pageview');
 </script>
 

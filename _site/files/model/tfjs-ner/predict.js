@@ -47,7 +47,7 @@ function make_sequences(words_array) {
 async function make_predict() {
     $(".main-result").html("");
     $('.attention-bar').html("");
-    $(".tags-result").html("<h5>Tags review</h5><table class='table table-sm table-bordered tags-review'></table>");
+    $(".tags-result").html("<h5>NER Predictions</h5><table class='table table-sm table-bordered tags-review'></table>");
 
     let words = $('#input_text').val().split(' ');
     let sequence = make_sequences(words);
@@ -84,21 +84,21 @@ async function make_predict() {
       x.push(word);
       y.push(attention_probs[index]);
     });
-    let plot_data = {x: x, y: y, type: 'bar'};
+    let plot_data = {x: x, y: y, type: 'bar',marker:{color:'red'}};
     Plotly.newPlot('attention_bar', [plot_data], {height: 300});
     $('.attention-bar').prepend("<h5>Attention</h5>");
 
-    $('.tags-review').append("<tr id='tags-words'><th>normalized word</th></tr>");
+    $('.tags-review').append("<tr id='tags-words'><th>Words</th></tr>");
     words.forEach(function(word) {
       $('#tags-words').append("<td>"+word_preprocessor(word)+"</td>");
     });
 
-    $('.tags-review').append("<tr id='tags-sen'><th>word_id <i>(0 - PAD, 1 - UNK)</i></th></tr>");
-    sequence.slice(0, words.length).forEach(function(tok) {
-      $('#tags-sen').append("<td>"+tok+"</td>");
-    });
+    // $('.tags-review').append("<tr id='tags-sen'><th>word_id <i>(0 - PAD, 1 - UNK)</i></th></tr>");
+    // sequence.slice(0, words.length).forEach(function(tok) {
+    //   $('#tags-sen').append("<td>"+tok+"</td>");
+    // });
 
-    $('.tags-review').append("<tr id='tags-ner'><th>token</th></tr>");
+    $('.tags-review').append("<tr id='tags-ner'><th>prediction</th></tr>");
     predictions_tags.slice(0, words.length).forEach(function(tok) {
       $('#tags-ner').append("<td>"+tok+"</td>");
     });
@@ -110,9 +110,21 @@ async function make_predict() {
     // }
 };
 
+async function clearForm(){
+$(".main-result").html("");
+    $('.attention-bar').html("");
+    $(".tags-result").html("");
+    document.getElementById("input_text").value = ''
+
+}
+
 $("#get_ner_button").click(make_predict);
 $('#input_text').keypress(function (e) {
     if (e.which == 13) {
       make_predict();
     }
   });
+$('#clear_bttn').click(clearForm);
+
+
+

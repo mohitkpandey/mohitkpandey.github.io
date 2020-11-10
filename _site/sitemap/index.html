@@ -557,7 +557,7 @@
 
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="permalink">TFJS My NER
+        <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="permalink">Named entity recognition with simple Attention
 </a>
       
     </h2>
@@ -567,7 +567,7 @@
 
 
   
-	  less than 1 minute read
+	  1 minute read
 	
 </p>
     
@@ -577,9 +577,12 @@
     
     
     
-    <p class="archive__item-excerpt" itemprop="description"><p><b>NER hosted with TFJS</b>
-<br />
-Epsum lorem blah blah</p>
+    <p class="archive__item-excerpt" itemprop="description"><p>NER implementation hosted within browser using Tensorflow-JS.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Named-entity recognition</a> is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
+See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Continue reading for model explanation and code.</p>
+
+<h4 id="demo">Demo</h4>
 
 </p>
     
@@ -618,74 +621,6 @@ In this series, I will explore
 various state-of-the-art NLP architectures to build NMT systems algorithms and hope to focus on English to Hindi translation. 
 I will also attempt to provide simplified mathematical explanations of the models as well as implementation details.</p>
 
-<p>First on this list is Sequence-to-Sequence model using encoder-decoder paradigm. Check the <b>DEMO</b> below.</p>
-
-<html>
-<head>
-  
-<script>
-  function sendData()
-  {
-      let request = new XMLHttpRequest();
-      url = "http://127.0.0.1:8008/predict/"+document.getElementById('src').value
-      request.open("GET", url);
-      request.send();
-      request.onload = () => {
-        console.log(request);
-        if (request.status === 200) {
-          // by default the response comes in the string format, we need to parse the data into JSON
-          document.getElementById('trg').value= request.response;//JSON.parse(request.responseText));
-        } else {
-          console.log(`error ${request.status} ${request.statusText}`);
-        }
-      };
-
-  }
-
-</script>
-
-</head>
-<body>
-<h2>Please enter short German sentence</h2>
-Seperate punctuations with a space <i>( zwei junge weiße männer sind im freien in der nähe vieler büsche . )</i>
-<form>
-    <label for="sep_len">Source Sentence</label> <input id="src" name="sep_len" type="text" value="" />
-    <br />
-    <label for="sep_len">Target Sentence</label> <input id="trg" name="sep_len" type="text" value="" />
-    <br />
-    <input type="button" onclick="sendData()" value="Translate" />
-
-</form>
-
-</body>
-</html>
-
-<!-- Much has been written lately about the increasing militarization of US
-law enforcement. One of the most visible indicators of this shift in
-recent decades is the increased frequency of tactical gear and equipment
-worn and carried by police officers. However, this pales in comparison
-to images of police departments bringing armored vehicles to peaceful
-protests.  People often criticize police departments or SWAT
-teams for owning and deploying tanks in situations that don’t warrant
-their use. In reality, these ‘tanks’ are typically [Mine-Resistant
-Ambush Protected](https://en.wikipedia.org/wiki/MRAP) (MRAP) vehicles.
-MRAPs were developed by the US military and produced by various
-manufacturers from 2007-2009. As their name suggests, they are designed
-to protect passengers from an improvised explosive device (IED) attack.
-
-Given the extreme threat they were designed to survive, MRAPs are
-emblematic of increasing police militarization in the US. But how did
-police come to own these military-grade vehicles?
-
-# Where have all the MRAPs gone?
-
-Police departments, sheriff’s offices, and even school districts (the LA
-Unified School District [briefly owned an
-MRAP](https://www.lamag.com/citythinkblog/lausd-keys-mrap-tank/) in 2014
-before [returning it to the Department of
-Defense](https://www.dailynews.com/2014/11/21/lausd-school-police-return-armored-military-vehicle-which-is-now-in-barstow/))
-
- -->
 </p>
     
     
@@ -980,7 +915,7 @@ using Keras and served using Tensorflow.js</p>
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-178627262-1', 'auto');
+  ga('create', 'G-HKRCE9X0YB', 'auto');
   ga('send', 'pageview');
 </script>
 
