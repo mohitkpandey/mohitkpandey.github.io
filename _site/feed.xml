@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://mohitkpandey.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mohitkpandey.github.io/" rel="alternate" type="text/html" /><updated>2020-11-10T10:06:11-06:00</updated><id>https://mohitkpandey.github.io/feed.xml</id><title type="html">Mohit Pandey</title><subtitle>Ph.D. Candidate</subtitle><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><entry><title type="html">Seq2Seq Machine Translation</title><link href="https://mohitkpandey.github.io/posts/2020/11/seq2seq/" rel="alternate" type="text/html" title="Seq2Seq Machine Translation" /><published>2020-11-08T00:00:00-06:00</published><updated>2020-11-08T00:00:00-06:00</updated><id>https://mohitkpandey.github.io/posts/2020/11/Seq2seq</id><content type="html" xml:base="https://mohitkpandey.github.io/posts/2020/11/seq2seq/">&lt;p&gt;I explore Seq2Seq model in Pytorch to build a neural machine translation system. &lt;span style=&quot;color:red&quot;&gt;&lt;strong&gt;Currently the system translates from German to English.&lt;/strong&gt;&lt;/span&gt; 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://mohitkpandey.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mohitkpandey.github.io/" rel="alternate" type="text/html" /><updated>2020-11-10T10:24:56-06:00</updated><id>https://mohitkpandey.github.io/feed.xml</id><title type="html">Mohit Pandey</title><subtitle>Ph.D. Candidate</subtitle><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><entry><title type="html">TFJS My NER</title><link href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="alternate" type="text/html" title="TFJS My NER" /><published>2020-11-10T00:00:00-06:00</published><updated>2020-11-10T00:00:00-06:00</updated><id>https://mohitkpandey.github.io/posts/2020/11/TFJS-NER</id><content type="html" xml:base="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/">&lt;p&gt;&lt;b&gt;NER hosted with TFJS&lt;/b&gt;
+&lt;br /&gt;
+Epsum lorem blah blah
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
+    &lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H0NW5Z2MYC');
+    &lt;/script&gt;
+    &lt;title&gt;Digit Recognition WebApp&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;Testing Simple Machine Learning Model into an WebApp using TensorFlow.js&quot; /&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;Machine Learning, TensorFlow.js&quot; /&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Mohit Pandey&quot; /&gt;
+
+   &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot; /&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;TensorFlow js demo for Named-entity recognition (NER) (Sequence Tagging task). Implemented with Keras (GloVe + GRU RNN) and tensorflow.js&quot; /&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;Named-entity recognition TensorFlow.js demo&quot; /&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;TensorFlow js demo for Named-entity recognition (NER) (Sequence Tagging task). Implemented with Keras (GloVe + GRU RNN) and tensorflow.js&quot; /&gt;
+    &lt;!-- &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot; integrity=&quot;sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T&quot; crossorigin=&quot;anonymous&quot;&gt; --&gt;
+    &lt;style&gt;
+        .demo {
+            margin: 2em auto;
+        }
+        .main-result {
+            margin: 3em auto;
+        }
+        .result {
+            padding: 1em;
+        }
+        .demo-header {
+            font-size: 1.5rem;
+            margin: 1em;
+        }
+        .tags-review {
+            margin-top: 1.5rem;
+        }
+    &lt;/style&gt;
+
+
+&lt;script&gt;
+  function clearForm()
+  {
+      document.getElementById(&quot;input_text&quot;).value=''
+
+  }
+&lt;/script&gt;
+
+
+  &lt;/head&gt;
+  &lt;body&gt;
+   &lt;!--  &lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js&quot;&gt;&lt;/script&gt; --&gt;
+
+  &lt;main role=&quot;main&quot; class=&quot;container&quot;&gt;
+        &lt;h1 itemprop=&quot;name headline&quot;&gt;Named-entity recognition&lt;/h1&gt;
+        &lt;h2&gt;TensorFlow.js demo&lt;/h2&gt;
+        &lt;hr class=&quot;my-4&quot; /&gt;
+        &lt;p&gt;
+            Enter sentence like &lt;code&gt;The European Commission said that nuclear Energy may be dangerous.&lt;/code&gt;
+            or &lt;code&gt;I like Moscow!&lt;/code&gt;.
+        &lt;/p&gt;
+
+   &lt;div class=&quot;card demo&quot;&gt;
+            &lt;div class=&quot;card-header&quot;&gt;
+                &lt;h1 class=&quot;demo-header&quot;&gt;NER demo in your browser
+                    &lt;div class=&quot;loading-model spinner-border text-primary&quot; role=&quot;status&quot;&gt;
+                        &lt;span class=&quot;sr-only&quot;&gt;Loading...&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/h1&gt;
+                &lt;form class=&quot;form&quot; onkeypress=&quot;return event.keyCode != 13;&quot;&gt;
+                    &lt;div class=&quot;form-group mx-sm-3 md-2&quot;&gt;
+                        &lt;input type=&quot;text&quot; class=&quot;form-control form-control-xs&quot; id=&quot;input_text&quot; placeholder=&quot;I Like Moscow!&quot; /&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;d-flex justify-content-center&quot;&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;get_ner_button&quot;&gt;Search Entities&lt;/button&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;clear_bttn&quot; onclick=&quot;clearForm()&quot;&gt;Clear&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+
+   &lt;div class=&quot;result main-result&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;result attention-bar&quot; id=&quot;attention_bar&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;result tags-result&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        
+   &lt;/main&gt;
+
+   &lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js&quot; integrity=&quot;sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js&quot; integrity=&quot;sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../../../../files/model/tfjs-ner/vocabs.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../../../../files/model/tfjs-ner/predict.js&quot;&gt;&lt;/script&gt;
+
+
+  &lt;script&gt;
+      canvas.addEventListener('mouseup', function() {
+      // $('#number').html('&lt;img id=&quot;spinner&quot; src=&quot;spinner.gif&quot;/&gt;');
+      canvas.removeEventListener('mousemove', onPaint, false);
+      var img = new Image();
+      img.onload = function() {
+        context.drawImage(img, 0, 0, 28, 28);
+        data = context.getImageData(0, 0, 28, 28).data;
+        var input = [];
+        for(var i = 0; i &lt; data.length; i += 4) {
+          input.push(data[i + 2] / 255);
+        }
+        predict(input);
+      };
+      img.src = canvas.toDataURL('image/png');
+    }, false);
+
+    var onPaint = function() {
+      context.lineTo(mouse.x, mouse.y);
+      context.stroke();
+    };
+
+    tf.loadLayersModel('../../../files/model/digit-class/model.json').then(function(model) {
+      window.model = model;
+    });
+
+    // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
+    // Set up touch events for mobile, etc
+    
+
+    var predict = function(input) {
+      if (window.model) {
+        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+          scores = scores[0];
+          predicted = scores.indexOf(Math.max(...scores));
+          $('#number').html(predicted);
+        });
+      } else {
+        // The model takes a bit to load, if we are too fast, wait
+        setTimeout(function(){predict(input)}, 50);
+      }
+    }
+
+    $('#clear').click(function(){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      $('#number').html('');
+    });
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</content><author><name>Mohit Pandey</name><email>pandey.mohitk@gmail.com</email></author><category term="Tensorflow-JS" /><category term="NLP" /><summary type="html">NER hosted with TFJS Epsum lorem blah blah</summary></entry><entry><title type="html">Seq2Seq Machine Translation</title><link href="https://mohitkpandey.github.io/posts/2020/11/seq2seq/" rel="alternate" type="text/html" title="Seq2Seq Machine Translation" /><published>2020-11-08T00:00:00-06:00</published><updated>2020-11-08T00:00:00-06:00</updated><id>https://mohitkpandey.github.io/posts/2020/11/Seq2seq</id><content type="html" xml:base="https://mohitkpandey.github.io/posts/2020/11/seq2seq/">&lt;p&gt;I explore Seq2Seq model in Pytorch to build a neural machine translation system. &lt;span style=&quot;color:red&quot;&gt;&lt;strong&gt;Currently the system translates from German to English.&lt;/strong&gt;&lt;/span&gt; 
 In this series, I will explore 
 various state-of-the-art NLP architectures to build NMT systems algorithms and hope to focus on English to Hindi translation. 
 I will also attempt to provide simplified mathematical explanations of the models as well as implementation details.&lt;/p&gt;
