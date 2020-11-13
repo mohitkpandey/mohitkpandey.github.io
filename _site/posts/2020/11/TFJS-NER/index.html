@@ -37,7 +37,7 @@
 
 
 
-  <meta property="og:description" content="NER implementation hosted within browser using Tensorflow-JS.Named-entity recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.">
+  <meta property="og:description" content="NER implementation hosted within browser using Tensorflow-JS.Definition from Wikipedia  Named Entity Recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.">
 
 
 
@@ -258,7 +258,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Named entity recognition with simple Attention">
-    <meta itemprop="description" content="NER implementation hosted within browser using Tensorflow-JS.Named-entity recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.">
+    <meta itemprop="description" content="NER implementation hosted within browser using Tensorflow-JS.Definition from Wikipedia  Named Entity Recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.See demo below. Continue reading for model explanation and code.">
     <meta itemprop="datePublished" content="November 10, 2020">
     
 
@@ -272,7 +272,7 @@
 
 
   
-	  1 minute read
+	  less than 1 minute read
 	
 </p>
           
@@ -290,25 +290,16 @@
 
       <section class="page__content" itemprop="text">
         
-          <aside class="sidebar__right ">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-align-justify"></i> On This Page</h4></header>
-              <ul class="toc__menu">
-  <li><a href="#demo">Demo</a></li>
-  <li><a href="#further-reading">Further reading….</a></li>
-  <li><a href="#code">Code</a></li>
-</ul>
-
-            </nav>
-          </aside>
-        
         <p>NER implementation hosted within browser using Tensorflow-JS.</p>
 
-<p><a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Named-entity recognition</a> is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
+<p>Definition from <a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Wikipedia</a></p>
+<blockquote>
+  <p>Named Entity Recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
 See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Continue reading for model explanation and code.</p>
+</blockquote>
 
 <!--more-->
-<h4 id="demo">Demo</h4>
+<h3 id="demo">Demo</h3>
 
 <head>
       <meta name="description" content="Testing Simple Machine Learning Model into an WebApp using TensorFlow.js" />
@@ -383,27 +374,13 @@ See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Cont
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.1/dist/tf.min.js"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="../../../../files/model/tfjs-ner/vocabs.js"></script>
       <script src="../../../../files/model/tfjs-ner/predict.js"></script>
       
    </body>
-
-<h4 id="further-reading">Further reading….</h4>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Diam sollicitudin tempor id eu nisl nunc mi. Pulvinar proin gravida hendrerit lectus. Volutpat est velit egestas dui id ornare arcu. Nec feugiat in fermentum posuere urna nec tincidunt. Accumsan tortor posuere ac ut. Nam at lectus urna duis convallis convallis tellus. Metus aliquam eleifend mi in nulla. Facilisis gravida neque convallis a cras semper auctor neque. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id. Est lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
-<h4 id="code">Code</h4>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
-<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s">'./trained_models/model.h5'</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'min'</span><span class="p">)</span>
-<span class="n">callbacks_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">checkpoint</span><span class="p">]</span>
-
-<span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-          <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-          <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_X</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">),</span>
-         <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks_list</span><span class="p">)</span>
-</code></pre></div></div>
 
 
         
@@ -474,7 +451,7 @@ See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Cont
 
   <nav class="pagination">
     
-      <a href="https://mohitkpandey.github.io/posts/2020/11/seq2seq/" class="pagination--pager" title="Seq2Seq Machine Translation
+      <a href="https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" class="pagination--pager" title="Encoder - Attention - Decoder
 ">Previous</a>
     
     
@@ -526,6 +503,64 @@ See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Cont
           
           
           
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" rel="permalink">Encoder - Attention - Decoder
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  10 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p><strong>Explaning Attention Network in Encoder-Decoder setting using Recurrent Neural Networks</strong></p>
+
+<p>Encoder-Decoder paradigm has become extremely popular in deep learning particularly in the space of natural language processing. Attention modules complement encoder-decoder architecture to make learning more close to human’s way. I present a gentle introduction to encode-attend-decode. I  provide motivation for each block and explain the math governing the model. Further, I break down the code into digestible bits for each mathematical equation. While there are good explanations to attention mechanism for machine translation task, I will try to explain the same for a sequence tagging task (Named Entity Recognition).</p>
+
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="../../../../files/images/encode_attend_decode.jpg" width="50%" height="50%" style="padding-bottom:0.5em;" /><b>Encode-Attend-Decode Architecture</b></div>
+
+<p>In the next part of the series, I will use the architecture explained here to solve the problem of <a href="/posts/2020/11/TFJS-NER/">Named Entity Recognition</a></p>
+
+</p>
+    
+    
+  </article>
+</div>
+
+            
+            
+          
+          
+        
+      
+          
+          
+      
+          
+          
+          
           
         
       
@@ -540,6 +575,53 @@ See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Cont
         
         
         
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" rel="permalink">Encoder - Attention - Decoder
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  10 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p><strong>Explaning Attention Network in Encoder-Decoder setting using Recurrent Neural Networks</strong></p>
+
+<p>Encoder-Decoder paradigm has become extremely popular in deep learning particularly in the space of natural language processing. Attention modules complement encoder-decoder architecture to make learning more close to human’s way. I present a gentle introduction to encode-attend-decode. I  provide motivation for each block and explain the math governing the model. Further, I break down the code into digestible bits for each mathematical equation. While there are good explanations to attention mechanism for machine translation task, I will try to explain the same for a sequence tagging task (Named Entity Recognition).</p>
+
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="../../../../files/images/encode_attend_decode.jpg" width="50%" height="50%" style="padding-bottom:0.5em;" /><b>Encode-Attend-Decode Architecture</b></div>
+
+<p>In the next part of the series, I will use the architecture explained here to solve the problem of <a href="/posts/2020/11/TFJS-NER/">Named Entity Recognition</a></p>
+
+</p>
+    
+    
+  </article>
+</div>
+
         
           
 
@@ -577,54 +659,6 @@ See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Cont
 In this series, I will explore 
 various state-of-the-art NLP architectures to build NMT systems algorithms and hope to focus on English to Hindi translation. 
 I will also attempt to provide simplified mathematical explanations of the models as well as implementation details.</p>
-
-</p>
-    
-    
-  </article>
-</div>
-
-        
-          
-
-
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://mohitkpandey.github.io/posts/2020/11/digit-class/" rel="permalink">Digit Classification
-</a>
-      
-    </h2>
-    
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-  
-	  less than 1 minute read
-	
-</p>
-    
-
-    
-      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-01T00:00:00-05:00">November 01, 2020</time></p>
-    
-    
-    
-    <p class="archive__item-excerpt" itemprop="description"><p><b>Digit Recognition using Deep Learning</b>
-<br /></p>
-<p>
-This page is best viewed <a href="https://mohitpandey.netlify.app/posts/2020/11/digit-class/">here</a>
-
-</p>
-<p>Webapp to recognize handwritten digits between 0 and 9. Model trained 
-using Keras and served using Tensorflow.js</p>
 
 </p>
     

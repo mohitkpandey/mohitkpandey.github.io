@@ -1,0 +1,862 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Encoder - Attention - Decoder - Mohit Pandey</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Mohit Pandey">
+<meta property="og:title" content="Encoder - Attention - Decoder">
+
+
+  <link rel="canonical" href="https://mohitkpandey.github.io/posts/2020/11/En-Att-De/">
+  <meta property="og:url" content="https://mohitkpandey.github.io/posts/2020/11/En-Att-De/">
+
+
+
+  <meta property="og:description" content="Explaning Attention Network in Encoder-Decoder setting using Recurrent Neural NetworksEncoder-Decoder paradigm has become extremely popular in deep learning particularly in the space of natural language processing. Attention modules complement encoder-decoder architecture to make learning more close to human’s way. I present a gentle introduction to encode-attend-decode. I  provide motivation for each block and explain the math governing the model. Further, I break down the code into digestible bits for each mathematical equation. While there are good explanations to attention mechanism for machine translation task, I will try to explain the same for a sequence tagging task (Named Entity Recognition).Encode-Attend-Decode ArchitectureIn the next part of the series, I will use the architecture explained here to solve the problem of Named Entity Recognition">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-11-10T00:00:00-06:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mohit Pandey",
+      "url" : "https://mohitkpandey.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="C-UVrmUCUMmXNs9Gy9W1ilDqiP2ZPhqb69o5LlGUhBo" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://mohitkpandey.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mohit Pandey Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://mohitkpandey.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="https://mohitkpandey.github.io/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="https://mohitkpandey.github.io/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="https://mohitkpandey.github.io/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="https://mohitkpandey.github.io/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="https://mohitkpandey.github.io/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="https://mohitkpandey.github.io/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="https://mohitkpandey.github.io/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="https://mohitkpandey.github.io/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="https://mohitkpandey.github.io/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="https://mohitkpandey.github.io/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="https://mohitkpandey.github.io/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="https://mohitkpandey.github.io/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="https://mohitkpandey.github.io/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16">
+<link rel="manifest" href="https://mohitkpandey.github.io/images/manifest.json?v=M44lzPylqQ">
+<link rel="mask-icon" href="https://mohitkpandey.github.io/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000">
+<link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="https://mohitkpandey.github.io/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="https://mohitkpandey.github.io/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://mohitkpandey.github.io/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="https://mohitkpandey.github.io/">Mohit Pandey</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://mohitkpandey.github.io/publications/">Publications</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://mohitkpandey.github.io/teaching/">Teaching</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://mohitkpandey.github.io/posts/">Posts</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://mohitkpandey.github.io/cv/">CV</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="https://mohitkpandey.github.io/images/profile.jpg" class="author__avatar" alt="Mohit Pandey">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mohit Pandey</h3>
+    <p class="author__bio">Ph.D. Candidate</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Contact</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker-alt" aria-hidden="true"></i> New York, NY</li>
+      
+      
+      
+      
+        <li><a href="mailto:pandey.mohitk@gmail.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+      
+      
+       
+      
+        <li><a href="https://twitter.com/mkp0705"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+        <li><a href="https://www.linkedin.com/in/mohit-pandey-961337120/"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/diamondspark"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?hl=en&user=oUhThscAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Encoder - Attention - Decoder">
+    <meta itemprop="description" content="Explaning Attention Network in Encoder-Decoder setting using Recurrent Neural NetworksEncoder-Decoder paradigm has become extremely popular in deep learning particularly in the space of natural language processing. Attention modules complement encoder-decoder architecture to make learning more close to human’s way. I present a gentle introduction to encode-attend-decode. I  provide motivation for each block and explain the math governing the model. Further, I break down the code into digestible bits for each mathematical equation. While there are good explanations to attention mechanism for machine translation task, I will try to explain the same for a sequence tagging task (Named Entity Recognition).Encode-Attend-Decode ArchitectureIn the next part of the series, I will use the architecture explained here to solve the problem of Named Entity Recognition">
+    <meta itemprop="datePublished" content="November 10, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Encoder - Attention - Decoder
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  10 minute read
+	
+</p>
+          
+        
+        
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-align-justify"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#encoder">Encoder</a>
+    <ul>
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#implementation-details-with-mathematical-explanation-and-code">Implementation details with mathematical explanation and code</a></li>
+    </ul>
+  </li>
+  <li><a href="#attention">Attention</a>
+    <ul>
+      <li><a href="#motivation-1">Motivation</a></li>
+      <li><a href="#implementation-details-with-mathematical-explanation-and-code-1">Implementation details with mathematical explanation and code</a></li>
+    </ul>
+  </li>
+  <li><a href="#decoder">Decoder</a>
+    <ul>
+      <li><a href="#motivation-2">Motivation</a></li>
+      <li><a href="#implementation-details-with-mathematical-explanation-and-code-2">Implementation details with mathematical explanation and code</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p><strong>Explaning Attention Network in Encoder-Decoder setting using Recurrent Neural Networks</strong></p>
+
+<p>Encoder-Decoder paradigm has become extremely popular in deep learning particularly in the space of natural language processing. Attention modules complement encoder-decoder architecture to make learning more close to human’s way. I present a gentle introduction to encode-attend-decode. I  provide motivation for each block and explain the math governing the model. Further, I break down the code into digestible bits for each mathematical equation. While there are good explanations to attention mechanism for machine translation task, I will try to explain the same for a sequence tagging task (Named Entity Recognition).</p>
+
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="../../../../files/images/encode_attend_decode.jpg" width="50%" height="50%" style="padding-bottom:0.5em;" /><b>Encode-Attend-Decode Architecture</b></div>
+
+<p>In the next part of the series, I will use the architecture explained here to solve the problem of <a href="/posts/2020/11/TFJS-NER/">Named Entity Recognition</a>
+<!--more--></p>
+
+<h2 id="encoder">Encoder</h2>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>Encode the source/input sequence into a meaningful representation contatining information about the input sentence. In case of a problem involving images, this could be penultimate dense layer of a convolutional neural network. We’ll see handling textual input in more detail.</p>
+
+<p>Recurrent Neural Networks (RNN) are extremely suited to model sequential or temporal data. Text fits this category well. When a human reads a sentence, they process the current word they are reading $x_t$ while remembering what they had processed until then ${h_{t-1}}$. We model this using an RNN as follows</p>
+
+\[h_t = RNN(h_{t-1},x_{t})\]
+
+<p>where, $h_t$ is the hidden state of RNN (GRU/LSTM) at $t^{th}$ timestep. ${x_t}$ is a vectorial representation of the word (eg Word vector, Bag of Words etc.). <br />
+For t = T, $h_T$ becomes our thought vector. In absence of an attention network, this thought vector is the input to decoder at decoder’s timestep $0$. i.e.</p>
+
+\[S_0 = h_T\]
+
+<p>we’ll talk more about $s_t$ in <a href="#decoder">decoder</a> section.</p>
+
+<h3 id="implementation-details-with-mathematical-explanation-and-code">Implementation details with mathematical explanation and code</h3>
+
+<p>Implementing encoder is a 2 step process.</p>
+
+<ul>
+  <li>
+    <p>If each word in the sentence is converted to a <em>d</em> dimension word vector, $x_i \in R^d$. Every sentence is normalized to same length T, typically equal to the longest sentence in the corpus. This is done by padding &lt;PAD&gt; token to shorter sentences. Consequently, each sentence in our dataset $Sent^{(i)}$ with T words becomes $Sent^{(i)} \in R^{T \times d} $. Following picture helps me visualize this</p>
+
+    <p><img src="../../../../files/images/sent_dim.png" style=" margin-right: 5px;" width="50%" height="50%" /></p>
+
+    <p>This is easy to translate to code</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#MAX_SEQUENCE_LENGTH = T
+</span><span class="n">words_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">])</span>
+<span class="c1">#words_input = [1,T] :1 = batchsize (for simplifying explanation)
+#EMBEDDING_DIM = d (200 for used pretrained word2vec)
+#embedding_tensor = weights from pretrained embedding. Dim: |Vocab| x d
+</span><span class="n">x</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="n">words_vocab_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">EMBEDDING_DIM</span><span class="p">,</span>
+                <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="n">embedding_tensor</span><span class="p">],</span>
+                <span class="n">input_length</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">,</span>
+                <span class="n">trainable</span><span class="o">=</span><span class="bp">False</span><span class="p">)(</span><span class="n">words_input</span><span class="p">)</span>
+<span class="c1">#x = vectorized sentence (Sent_i):[1,T,d] :1 = batchsize (for simplifying explanation)
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>If there are $h$ units in each RNN (LSTM/GRU) block, each hidden RNN unit will produce an $h$ dimensional output called <em>hidden state</em>. <span style="color:gray"><em>(Additionally we also get another output called cell state if using an LSTM. I’ll write another blog-post detailing workings of LSTMs and GRUs, meanwhile there’s an excellent explanation <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">here</a></em>)</span>.
+Each $h_t \in R^h$. Note there are always T hidden units, one corresponding to each word. This would mean that output of the RNN block (RNN block comprises of all the $T$ hidden units together), will be in $R^{T \times h}$</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">#num_hidden_units = h
+</span>  <span class="n">outputs</span> <span class="o">=</span> <span class="n">GRU</span><span class="p">(</span><span class="n">num_hidden_units</span><span class="p">,</span>
+                <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s">'RNN_Layer'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+  <span class="c1">#outputs = [1,T,h] :1 = batchsize
+</span></code></pre></div>    </div>
+
+    <p>In absence of the attention module, we only care for RNN output from last timestep $T$ as that ($h_T$) will be our <em>thought vector</em> (input to the decoder). For this, set <code>return_sequences = False</code></p>
+  </li>
+</ul>
+
+<h2 id="attention">Attention</h2>
+
+<h3 id="motivation-1">Motivation</h3>
+
+<p>The basic attention network courtesy <a href="https://arxiv.org/abs/1409.0473">Bahdanau et.al</a> was originally proposed to solve and maximize the machine translation performance. However, it has been shown to perform exceedingly well in a wide variety of other downstream tasks as well such as NER, question answering, image classification etc.</p>
+
+<blockquote>
+  <p>Use of a fixed-length vector is a bottleneck in improving the performance of this basic encoder-decoder architecture, and propose to extend this by allowing a model to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word, without having to form these parts as a hard segment explicitly.</p>
+</blockquote>
+
+<p>A very primitive intituion to this idea of attention is to model human behavior towards sequence processing. Consider the task of question answering. The objective is to answer questions based upon understanding of a document (paragraph). The encoder encodes the entire sentence into one fixed dimension vector $h_T, (thought vector)$. It’s unreasonable to expect this fixed vector to be equally effective in encoding the information from early timesteps $t \lt\lt T$ just as well as it would at $t\approx T$. RNN’s are prone to vanishing gradients hence making such a learning even harder. 
+<br />A human on the other hand would not typically read the entire document (input) in order to make inferences. Humans pay selective focus (attention) to different parts of the sentence guided by the objective of the downstream task. So to answer a question about authorship of a document, a human reader will focus primarily on beginning of the document. An attention network tries to emulate this by learning to attend to different parts of the sentence with varying intensity (energy).</p>
+
+<p>The ability of attention network to assign higher scores to important phrases in texts and patches in images makes for interesting visualization and provides an interesting way for model explanation. In the case of Named Entitiy Recognition, the hope is that an attention module will learn to attend to most significant words, phrases and tokens that guide the classification of each word into classes (PER, MISC, LOC, ORG). In essence, we should see high attention score for words that belong to one of the named entity. For an example sentence to detect named entity, attention scores for relevant classes may look like following. You may play with more sentences <a href="/posts/2020/11/TFJS-NER/#demo">here</a></p>
+
+<p><img src="../../../../files/images/att-ner-vis.png" style=" margin-right: 5px;" width="100%" height="70%" /></p>
+
+<h3 id="implementation-details-with-mathematical-explanation-and-code-1">Implementation details with mathematical explanation and code</h3>
+<p>For each timestep of the decoder, the attention mechanism computes a weighted sum of importance over all the words in the input sequence. In place of the thought-vector, this weighted sum is fed to the decoder. Attention mechanism proceeds through a three step process.</p>
+
+<ul>
+  <li>
+    <p><strong>Calculation of Energy Scores</strong> $ e_{jt} $</p>
+
+    <p>This is defined as importance of the $j^{th}$ word when making inference about the $t^{th}$ word of the decoder. Bahdanau described this for machine translation task where $j \neq t$. In our example of NER however, $j=t $ since there exists a label (PER, MISC, LOC, ORG or None) for each $t \in (1,T)$ of our input sentence. Hence, we’ll have for each class in our labelset, an energy score for every word in the input sentence. For a sentence, <code>I like London</code>, we’ll have a 3 $(T)$ dimensional vector. $ e_{jt} $ is defined as following</p>
+
+    <p>\(e_{jt} = V_a^T tanh(W_as_{t-1}+U_ah_j)\) \</p>
+
+    <p>where $s_{t-1}$ is the previous timestep of the decoder. <br />
+In our example, we can ignore $s_{t-1}$ as there is no dependence on predicted class (tag) of previous word on predicting tag of current word by the decoder. So our energy score $e_j$ becomes</p>
+
+\[e_{j} = V_a^T tanh(U_ah_j)\]
+
+    <p>We’ll rewrite this equation to make dimensions consistent in this post</p>
+
+\[e_{j} = [tanh(h_jU_a)]V_a^T\]
+
+    <p>Let’s look at the dimensions</p>
+
+    <p>$h_j \in R^h$ i.e. $R^{1 \times h}$(see <a href="#encoder">encoder</a>)<br />
+$U_a \in R^{h \times d_a}$ <br />
+$U_a h_j \in R^{1 \times d_a }$ <br />
+$tanh(U_a  h_j) \in R^{1 \times d_a}$ <br />
+$V_a \in R^{1 \times d_a} $ <br />
+$V_a^T \in R^{d_a \times 1} $ <br />
+$[tanh(U_ah_j)]V_a^T \in R^{1}$ <br />
+$d_a$ is usually choosen as $h/2$</p>
+
+    <p>We get a scalar energy score for each word. For entire sequence of $T$ words, our $h \in R^{h \times t}$. Similarly, in all other dimensions 1 is replaced by $T$. Ultimately, we get a $T$ dimensional energy vector with an energy score scalar for every word in our sentence. Let’s see how to code this</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#hidden layer = tanh(Ua x h), outputs: from encoder [1,T,h]
+#hidden_layer :[1,T,d_a]
+</span><span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'tanh'</span><span class="p">)(</span><span class="n">outputs</span><span class="p">)</span>
+<span class="c1">#energy vector = (tanh(h x Ua)).Va
+#energy_vector : [1,T,1]
+</span><span class="n">energy_vector</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="bp">None</span><span class="p">)(</span><span class="n">hidden_layer</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Calculation of attention scores</strong> $ \alpha_{j} $</p>
+
+    <p>In deep learning, we often normalize scores into probabilities by taking softmax. This helps us make more intuitive sense of the numbers yielded. Keeping up with this spirit, we convert our energy scores to attention scores as
+\(\alpha_j = softmax(e_j)\)
+This yields an <em>attention vector</em> in $R^T$ with an attention score corresponding to each word in the input sentence. This attention vector is typically used for visualizing model’s learning.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#attention_vector : [1,T]
+</span><span class="n">attention_vector</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'attention_vector'</span><span class="p">)(</span><span class="n">energy_vector</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Calculation of context vector <em>c</em></strong></p>
+
+    <p>Finally we calculate the context vector that is the attention weighted sum of learned representations of words by the encoder. In case of an NER, this context vector is fed to the decoder and helps the decoder how much focus (attention) it should pay to each word when deciding the class label for each word in the input sentence. <span style="color:gray"><em>(In a machine translation setting, each timestep (t) of the decoder gets a different context vector $c_t$).</em></span></p>
+
+\[c = \sum_{j=1}^T \alpha_jh_j\]
+
+    <div style="width:image width px; font-size:80%; text-align:center;"><img src="../../../../files/images/context_vector.jpg" width="100%" height="100%" style="padding-bottom:0.5em;" />Context Vector</div>
+
+    <p>From the figure, it’s clear that each $c_j$ will be a $h \times T$ dimension matrix (same as <em>outputs</em> from encoder).</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">#Repeating and transposing attention_vector 
+</span>  <span class="c1">#to make matrix multiplication with outputs possible 
+</span>  <span class="n">attention</span> <span class="o">=</span> <span class="n">RepeatVector</span><span class="p">(</span><span class="n">num_hidden_units</span><span class="p">)(</span><span class="n">attention_vector</span><span class="p">)</span>
+  <span class="n">attention</span> <span class="o">=</span> <span class="n">Permute</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])(</span><span class="n">attention</span><span class="p">)</span>
+  <span class="n">context</span> <span class="o">=</span> <span class="n">Multiply</span><span class="p">()([</span><span class="n">outputs</span><span class="p">,</span> <span class="n">attention</span><span class="p">])</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="decoder">Decoder</h2>
+
+<h3 id="motivation-2">Motivation</h3>
+<p>Now that we have the context vector, which seems to be a more meaningful and powerful way to encode the source sentences, we are ready to make inferences. The choice of the decoder architecture is governed by the downstream task at hand. When the objective is to generate text (like in machine translation or text summarization), often the decoder is made with an RNN. The hidden states of this decoder RNN are denoted by $s_t$. In our example of NER, our decoder will be simply a dense, fully connected layer with softmax to out prediction probabilities. A more complex variant of decoder for the same problem is also possible.</p>
+
+<h3 id="implementation-details-with-mathematical-explanation-and-code-2">Implementation details with mathematical explanation and code</h3>
+<p>Keeping the decoder simple, we pass our <em>context vectors</em> through a fully connected layer followed by a softmax layer. While the number of units in the fully connected layer can be choosen arbitrarily, the softmax is equal to the number of possible classes. In our example, this would be all possible named entity tags.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fc1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">num_fc_units</span><span class="p">)(</span><span class="n">encoding</span><span class="p">)</span>
+<span class="n">fc2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">class_count</span><span class="p">)(</span><span class="n">fc1</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'prediction'</span><span class="p">)(</span><span class="n">fc2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Presented here is an overview of the vanilla attention network by Bahdanau et.al. This <a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html">blog-post</a> presents a survey on other variants of attention and an introduction to Transformers.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#attention" class="page__taxonomy-item" rel="tag">Attention</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#keras" class="page__taxonomy-item" rel="tag">Keras</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#nlp" class="page__taxonomy-item" rel="tag">NLP</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#rnn" class="page__taxonomy-item" rel="tag">RNN</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://mohitkpandey.github.io/tags/#text-classification" class="page__taxonomy-item" rel="tag">Text Classification</a>
+    
+    </span>
+  </p>
+
+
+
+
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mohitkpandey.github.io/posts/2020/11/En-Att-De/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="https://mohitkpandey.github.io/posts/2020/11/seq2seq/" class="pagination--pager" title="Seq2Seq Machine Translation
+">Previous</a>
+    
+    
+      <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" class="pagination--pager" title="Named entity recognition with simple Attention
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+        
+        
+        
+        
+        
+      
+          
+          
+      
+          
+          
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="permalink">Named entity recognition with simple Attention
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p>NER implementation hosted within browser using Tensorflow-JS.</p>
+
+<p>Definition from <a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Wikipedia</a></p>
+<blockquote>
+  <p>Named Entity Recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
+See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Continue reading for model explanation and code.</p>
+</blockquote>
+
+</p>
+    
+    
+  </article>
+</div>
+
+            
+            
+          
+          
+        
+      
+          
+          
+      
+          
+          
+          
+          
+        
+      
+          
+          
+      
+          
+          
+          
+          
+        
+      
+          
+          
+      
+          
+          
+          
+          
+        
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/TFJS-NER/" rel="permalink">Named entity recognition with simple Attention
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-10T00:00:00-06:00">November 10, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p>NER implementation hosted within browser using Tensorflow-JS.</p>
+
+<p>Definition from <a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Wikipedia</a></p>
+<blockquote>
+  <p>Named Entity Recognition is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, etc.
+See <a href="/posts/2020/11/TFJS-NER/#demo"><b><em>demo</em></b></a> below. Continue reading for model explanation and code.</p>
+</blockquote>
+
+</p>
+    
+    
+  </article>
+</div>
+
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://mohitkpandey.github.io/posts/2020/11/seq2seq/" rel="permalink">Seq2Seq Machine Translation
+</a>
+      
+    </h2>
+    
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  less than 1 minute read
+	
+</p>
+    
+
+    
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2020-11-08T00:00:00-06:00">November 08, 2020</time></p>
+    
+    
+    
+    <p class="archive__item-excerpt" itemprop="description"><p>I explore Seq2Seq model in Pytorch to build a neural machine translation system. <span style="color:red"><strong>Currently the system translates from German to English.</strong></span> 
+In this series, I will explore 
+various state-of-the-art NLP architectures to build NMT systems algorithms and hope to focus on English to Hindi translation. 
+I will also attempt to provide simplified mathematical explanations of the models as well as implementation details.</p>
+
+</p>
+    
+    
+  </article>
+</div>
+
+        
+          
+      </div>
+    </div>
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<a href="/sitemap/">Sitemap</a>
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/diamondspark"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://mohitkpandey.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mohit Pandey. </div>
+
+      </footer>
+    </div>
+
+    <script src="https://mohitkpandey.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-HKRCE9X0YB', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mohitkpandey';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>
+

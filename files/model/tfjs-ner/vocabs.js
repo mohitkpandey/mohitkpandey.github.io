@@ -17201,13 +17201,9 @@ const words_vocab = {
 const tags_vocab = {
 	"<PAD>": 0,
 	 "<UNK>": 1,
-	 "B-ORG": 2,
+	 "ORG": 2,
 	 "O": 3,
-	 "B-MISC": 4,
-	 "B-PER": 5,
-	 "I-PER": 6,
-	 "B-LOC": 7,
-	 "I-ORG": 8,
-	 "I-MISC": 9,
-	 "I-LOC": 10,
+	 "MISC": 4,
+	 "PER": 5,
+	 "LOC": 6,
 };
