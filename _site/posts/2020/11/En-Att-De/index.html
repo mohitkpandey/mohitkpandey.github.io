@@ -411,7 +411,7 @@ Each $h_t \in R^h$. Note there are always T hidden units, one corresponding to e
 
     <p>This is defined as importance of the $j^{th}$ word when making inference about the $t^{th}$ word of the decoder. Bahdanau described this for machine translation task where $j \neq t$. In our example of NER however, $j=t $ since there exists a label (PER, MISC, LOC, ORG or None) for each $t \in (1,T)$ of our input sentence. Hence, we’ll have for each class in our labelset, an energy score for every word in the input sentence. For a sentence, <code>I like London</code>, we’ll have a 3 $(T)$ dimensional vector. $ e_{jt} $ is defined as following</p>
 
-    <p>\(e_{jt} = V_a^T tanh(W_as_{t-1}+U_ah_j)\) \</p>
+\[e_{jt} = V_a^T tanh(W_as_{t-1}+U_ah_j)\]
 
     <p>where $s_{t-1}$ is the previous time-step of the decoder. <br />
 In our example, we can ignore $s_{t-1}$ as there is no dependence on predicted class (tag) of previous word on predicting tag of current word by the decoder. So our energy score $e_j$ becomes</p>
@@ -426,8 +426,8 @@ In our example, we can ignore $s_{t-1}$ as there is no dependence on predicted c
 
     <p>$h_j \in R^h$ i.e. $R^{1 \times h}$(see <a href="#encoder">encoder</a>)<br />
 $U_a \in R^{h \times d_a}$ <br />
-$U_a h_j \in R^{1 \times d_a }$ <br />
-$tanh(U_a  h_j) \in R^{1 \times d_a}$ <br />
+$h_jU_a \in R^{1 \times d_a }$ <br />
+$tanh(h_jU_a) \in R^{1 \times d_a}$ <br />
 $V_a \in R^{1 \times d_a} $ <br />
 $V_a^T \in R^{d_a \times 1} $ <br />
 $[tanh(U_ah_j)]V_a^T \in R^{1}$ <br />

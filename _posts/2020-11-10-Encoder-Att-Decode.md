@@ -102,7 +102,7 @@ For each time-step of the decoder, the attention mechanism computes a weighted s
 
   This is defined as importance of the $j^{th}$ word when making inference about the $t^{th}$ word of the decoder. Bahdanau described this for machine translation task where $j \neq t$. In our example of NER however, $j=t $ since there exists a label (PER, MISC, LOC, ORG or None) for each $t \in (1,T)$ of our input sentence. Hence, we'll have for each class in our labelset, an energy score for every word in the input sentence. For a sentence, <code>I like London</code>, we'll have a 3 $(T)$ dimensional vector. $ e_{jt} $ is defined as following  
 
-  $$ e_{jt} = V_a^T tanh(W_as_{t-1}+U_ah_j)$$ \
+  $$ e_{jt} = V_a^T tanh(W_as_{t-1}+U_ah_j)$$ 
   
   where $s_{t-1}$ is the previous time-step of the decoder. \
   In our example, we can ignore $s_{t-1}$ as there is no dependence on predicted class (tag) of previous word on predicting tag of current word by the decoder. So our energy score $e_j$ becomes
@@ -117,8 +117,8 @@ For each time-step of the decoder, the attention mechanism computes a weighted s
   
   $h_j \in R^h$ i.e. $R^{1 \times h}$(see [encoder](#encoder))\
   $U_a \in R^{h \times d_a}$ \
-  $U_a h_j \in R^{1 \times d_a }$ \
-  $tanh(U_a  h_j) \in R^{1 \times d_a}$ \
+  $h_jU_a \in R^{1 \times d_a }$ \
+  $tanh(h_jU_a) \in R^{1 \times d_a}$ \
   $V_a \in R^{1 \times d_a} $ \
   $V_a^T \in R^{d_a \times 1} $ \
   $[tanh(U_ah_j)]V_a^T \in R^{1}$ \
