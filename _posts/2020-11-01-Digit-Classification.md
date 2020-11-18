@@ -7,15 +7,28 @@ tags:
   - Image Classification
   - MNIST
 ---
+<script >
+  function click(){
+    var x = document.URL;
+    if (x== "https://mohitpandey.netlify.app/posts/2020/11/digit-class/"){
+      net = document.getElementById("netlify");
+      net.style.visibility = "hidden";
+    }
+    else{console.log(typeof x) }
+    
+  }
+
+
+</script>
 
 <b>Digit Recognition using Deep Learning</b>
 <br>
 <p>
-This page is best viewed <a href ="https://mohitpandey.netlify.app/posts/2020/11/digit-class/">here</a>
-
-</p>
+<div class= "netlify" id="netlify">This page is best viewed <a href ="https://mohitpandey.netlify.app/posts/2020/11/digit-class/">here</a>
+</div></p>
 Webapp to recognize handwritten digits between 0 and 9. Model trained 
 using Keras and served using Tensorflow.js
+
 <!--more-->
 
 
@@ -68,7 +81,7 @@ using Keras and served using Tensorflow.js
          }
       </style>
    </head>
-   <body>
+   <body onload="click()">
       <!--<script type="text/javascript" src="http://livejs.com/live.js"></script>-->
       <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
