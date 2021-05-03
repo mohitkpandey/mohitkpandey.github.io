@@ -30,11 +30,11 @@ table, th, td {
 
 <table>
  
-  <tr>
+  <!-- <tr>
     <td><b> July 2020</b></td>
     <td></td>
     <td>Left Ipsos, active on job market</td>
-  </tr>
+  </tr> -->
   
   <tr>
     <td><b> June 2020</b></td>
