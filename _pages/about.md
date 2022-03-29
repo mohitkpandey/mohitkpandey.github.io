@@ -12,13 +12,14 @@ Welcome! I am an interdisciplinary researcher with skills and experience in mach
 
 My work is published in interdisciplinary science journals like Plos One and cardiac imaging journals (Euporean Heart Journal, JACC: Cardiovascular Imaging etc), My research explores methods to automate prognosis and diagnosis of diseases using deep learning tools. While I primarily focus on applied machine learning, I am also interested in delving further into theories governing statistical machine learning. 
 
-<!-- I am currently on the job market seeking Research & Developement positions in machine learning. -->
+<!-- I am currently on the job market seeking Research & Developement positions in machine learning.  -->
+
 News
 ======
-<!-- <b> July 2020</b> - Left Ipsos, active on job market <br>
+<!-- <b> July 2019</b> - Left Ipsos, active on job market <br>
 <b>June 2020 </b> - Our paper on Neural Information Retrieval from CT text reports using Convolutional Neural Network is accepted at Plos One. <br>
 <b>Nov 2019</b> - Our poster on Survey of deep learning based natural language processing for social media insights is accepted at Americal Association of Public Opinion Research, 2020<br>
-<b>July 2019 </b> - I will be joining Ipsos Public Affairs in New York City<br> -->
+<b>July 2020 </b> - I will be joining Ipsos Public Affairs in New York City<br> -->
 
 <style>
 table, th, td {
@@ -43,12 +44,15 @@ table, th, td {
  
  
  
+ 
+ 
+ 
 </table>
 
 Education
 ======
 Ph.D., Machine Learning
-<br><b>The University of British Columbia,                                  2021- </b>
+<br><b>University of British Columbia,                                  2021- </b>
 
 M.S., Computer Science 
 <br><b>Rutgers University,                                                    2017</b>
