@@ -12,8 +12,8 @@ Welcome! I am an interdisciplinary researcher with skills and experience in mach
 
 My work is published in interdisciplinary science journals like Plos One and cardiac imaging journals (Euporean Heart Journal, JACC: Cardiovascular Imaging etc), My research explores methods to automate prognosis and diagnosis of diseases using deep learning tools. While I primarily focus on applied machine learning, I am also interested in delving further into theories governing statistical machine learning. 
 
-I am currently on the job market seeking Research & Developement positions in machine learning. 
-
+<!-- I am currently on the job market seeking Research & Developement positions in machine learning. 
+ -->
 News
 ======
 <!-- <b> July 2020</b> - Left Ipsos, active on job market <br>
@@ -30,31 +30,17 @@ table, th, td {
 
 <table>
  
-  <!-- <tr>
-    <td><b> July 2020</b></td>
+  <tr>
+    <td><b> March 2022</b></td>
     <td></td>
-    <td>Left Ipsos, active on job market</td>
-  </tr> -->
+    <td>Our paper on The transformational role of GPU computing and deep learning in drug discovery is accepted in Nature Machine Intelligence. </td>
+  </tr>
   
   <tr>
     <td><b> June 2020</b></td>
     <td></td>
     <td> Our paper on Neural Information Retrieval from CT text reports using Convolutional Neural Network is accepted at Plos One.</td>
   </tr>
- 
- <tr>
-    <td><b> Nov 2019</b></td>
-    <td></td>
-    <td>Our poster on Survey of deep learning based natural language processing for social media insights is accepted at Americal Association of Public Opinion Research, 2020.</td>
-  </tr>
-  
-  <tr>
-    <td><b> June 2019</b></td>
-    <td></td>
-    <td> I will be leaving Weill Cornell Medicine and joining Ipsos Public Affairs in New York City</td>
-  </tr>
- 
- 
  
  
  
@@ -63,7 +49,7 @@ table, th, td {
 Education
 ======
 Ph.D., Machine Learning
-<br><b>University of British Columbia,                                  2021- </b>
+<br><b>The University of British Columbia,                                  2021- </b>
 
 M.S., Computer Science 
 <br><b>Rutgers University,                                                    2017</b>
