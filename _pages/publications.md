@@ -14,6 +14,7 @@ You can also find comprehensive list of my articles on my <u><a href="https://sc
   {% include archive-single.html %}
 {% endfor %}
 
-<sup>*</sup> Equal authorship statement
-<br>
 <i>[C]</i> Conference
+<!-- <sup>*</sup> Equal authorship statement -->
+<br>
+
