@@ -29,7 +29,13 @@ table, th, td {
 </style>
 
 <table>
- 
+
+<tr>
+    <td><b> May 2023</b></td>
+    <td></td>
+    <td>Awarded CIHR Doctoral Award of $105,000 for 3 years to pursue my ongoing research in Cancer Drug Discovery with Deep Learning </td>
+  </tr> 
+
   <tr>
     <td><b> March 2022</b></td>
     <td></td>
